@@ -1,0 +1,19 @@
+<?php
+
+
+use App\Models\Category;
+use App\Models\Post;
+
+it('has many posts', function () {
+    //Arrange
+    $category = Category::factory()->create();
+
+    //Act
+    $post = Post::factory()->create([
+        'category_id' => $category->id
+    ]);
+
+    //Assert
+    expect($category->posts)->toContain($post);
+
+});
