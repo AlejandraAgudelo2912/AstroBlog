@@ -34,6 +34,7 @@ class CommentController extends Controller
             'parent_id' => $parent_id,
         ]);
 
+
         return redirect()->route('posts.show', $post)->with('success', 'Comment created successfully');
     }
 

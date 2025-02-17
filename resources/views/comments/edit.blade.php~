@@ -7,7 +7,9 @@
     <form action="{{ route('posts.comments.update', [$post, $comment]) }}" method="POST">
         @include('comments.form-fields')
         <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">{{ __('Update Comment') }}</button>
+
         @csrf
         @method('PUT')
+
     </form>
 </x-blog-layout>
