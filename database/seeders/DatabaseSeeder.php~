@@ -42,5 +42,8 @@ class DatabaseSeeder extends Seeder
         Tag::factory(10)->create();
         ObservationPoint::factory(10)->create();
 
+        $token = $user->createToken('User-token')->plainTextToken;
+
+        dd($token);
     }
 }

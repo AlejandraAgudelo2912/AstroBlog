@@ -1,9 +1,6 @@
 <?php
 
 use App\Models\Post;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
-uses(RefreshDatabase::class);
 
 it('loads Post page successfully', function () {
     //Arrange
