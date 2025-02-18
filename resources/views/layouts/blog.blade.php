@@ -14,7 +14,7 @@
             }
         </style>
     </head>
-    <body class="bg-gray-100 dark:bg-black text-gray-900 dark:text-gray-200">
+    <body class="bg-gray-100 dark:bg-black text-gray-900 dark:text-gray-200" x-data="{ theme: '{{ session('theme', 'system') }}' }" :class="{ 'dark': theme === 'dark' }">
         @include('partials.navbar')
 
         <div class="flex min-h-screen">

@@ -17,7 +17,7 @@
     <body class="bg-gray-100 dark:bg-black text-gray-900 dark:text-gray-200">
         @include('partials.navbar')
 
-        <div class="flex min-h-screen z-0">
+        <div class="flex min-h-screen">
             @include('components.sidebar')
 
             <div class="flex-1">

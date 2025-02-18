@@ -21,6 +21,7 @@ class Post extends Model
         'likes',
         'cover_image',
         'category_id',
+        'is_featured',
     ];
 
     public function getRouteKeyName()
@@ -56,5 +57,10 @@ class Post extends Model
     public function scopePublicados($query)
     {
         return $query->where('status', 'published')->where('visibility', 'public');
+    }
+
+    public function scopeFeatured($query)
+    {
+        return $query->where('is_feature', true);
     }
 }
