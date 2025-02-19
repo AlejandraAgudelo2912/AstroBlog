@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Models\Post;
+use App\Models\User;
+use App\Observers\UserObserver;
 use App\Policies\PostPolicy;
 use App\View\Components\BlogLayout;
 use Illuminate\Support\Facades\Blade;
@@ -31,5 +33,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('manage-users', function ($user) {
             return $user->hasRole('god') || $user->hasRole('admin');
         });
+
+        User::observe(UserObserver::class);
     }
 }

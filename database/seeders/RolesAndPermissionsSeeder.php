@@ -37,6 +37,9 @@ class RolesAndPermissionsSeeder extends Seeder
             'create posts', 'edit posts', 'delete posts'
         ]);
 
+        $userRole = Role::where('name', 'user')->first();
+        $userRole->syncPermissions(['create posts', 'edit posts', 'delete posts']);
+
         $testUser = User::updateOrCreate(
             ['email' => 'test@example.com'],
             [

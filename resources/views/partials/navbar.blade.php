@@ -1,5 +1,5 @@
 <script type="text/javascript" src="{{ asset('js/navbar.js') }}"></script>
-<nav class="bg-gradient-to-r from-[#6a85b6] via-[#bac8e0] to-[#8ba1c4] text-white py-4 ml-64 relative overflow-hidden">
+<nav class="bg-gradient-to-r from-[#6a85b6] via-[#bac8e0] to-[#8ba1c4] text-white py-4 ml-64 relative">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div class="relative flex items-center justify-between h-16">
             <div class="flex-1 flex items-center sm:items-stretch sm:justify-start">
@@ -14,7 +14,7 @@
                 </div>
             </div>
 
-            <div class="fixed top-0 right-0 px-6 py-4 sm:block sm:ml-6">
+            <div class="absolute top-0 right-0 px-6 py-4 sm:block sm:ml-6">
                 <div class="flex space-x-4">
                     @guest
                         <a href="{{ route('login') }}" class="text-white hover:bg-indigo-800 px-3 py-2 rounded-md text-sm font-medium">{{__('Login')}}</a>

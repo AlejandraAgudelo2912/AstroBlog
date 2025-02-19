@@ -30,7 +30,7 @@ class PostPolicy
 
     public function create(User $user): bool
     {
-        return $user->hasRole('user') || $user->hasRole('admin');
+        return $user->hasRole('user') || $user->hasRole('admin') || $user->hasRole('god');
     }
 
 
