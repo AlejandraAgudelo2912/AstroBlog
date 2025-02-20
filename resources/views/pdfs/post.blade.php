@@ -10,10 +10,19 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #0d0d2b;
-            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffe8f3;
+            color: #4a4a4a;
             padding: 20px;
+        }
+
+        .logo {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            width: 80px;
+            height: auto;
+            z-index: 1;
         }
 
         .container {
@@ -21,25 +30,28 @@
             margin: auto;
             padding: 20px;
             border-radius: 10px;
-            background: #1c1c3d;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            background: #fffaf5;
+            box-shadow: 0 0 10px rgba(255, 182, 193, 0.5);
+            position: relative;
         }
 
         h1 {
             text-align: center;
-            color: #ffcc00;
+            color: #ff69b4;
+            font-size: 26px;
         }
 
         .info {
             font-size: 14px;
             text-align: center;
-            margin-bottom: 20px;
-            color: #b0b0b0;
+            margin-bottom: 15px;
+            color: #737373;
         }
 
         .content {
             text-align: justify;
             line-height: 1.6;
+            font-size: 14px;
         }
 
         .stats {
@@ -47,9 +59,10 @@
             justify-content: space-between;
             margin-top: 20px;
             padding: 10px;
-            background: #252545;
+            background: #ffe4e1;
             border-radius: 10px;
             font-weight: bold;
+            font-size: 14px;
         }
 
         .likes, .comments {
@@ -64,11 +77,12 @@
             width: fit-content;
             margin: auto;
             margin-top: 10px;
+            font-size: 14px;
         }
 
-        .public { background-color: #4caf50; color: white; }
-        .draft { background-color: #ff9800; color: white; }
-        .archived { background-color: #9e9e9e; color: white; }
+        .public { background-color: #98fb98; color: #008000; }
+        .draft { background-color: #ffd700; color: #8b8000; }
+        .archived { background-color: #d3d3d3; color: #696969; }
 
         .image-container {
             text-align: center;
@@ -78,11 +92,20 @@
         .image-container img {
             max-width: 100%;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 10px rgba(255, 192, 203, 0.5);
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 20px;
+            color: #777;
         }
     </style>
 </head>
 <body>
+
+<img src="{{ public_path('images/logo-dark.png') }}" alt="Logo" class="logo">
 
 <div class="container">
     <h1>{{ $post->title }}</h1>
@@ -103,9 +126,11 @@
     </div>
 
     <div class="stats">
-        <div class="likes">{{ $post->likes}} Likes</div>
-        <div class="comments">{{ $post->comments->count() }} Comentarios</div>
+        <div class="likes"> {{ $post->likes}} Likes</div>
+        <div class="comments">{{ is_countable($post->comments) ? $post->comments->count() : 0 }} Comentarios</div>
     </div>
+
+    <p class="footer">Blog Astronómico - Descubre el Universo</p>
 </div>
 
 </body>
