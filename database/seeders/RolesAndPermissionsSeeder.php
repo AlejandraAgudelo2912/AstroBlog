@@ -11,7 +11,7 @@ class RolesAndPermissionsSeeder extends Seeder
 {
     public function run(): void
     {
-        $roles = ['god','admin', 'editor', 'user'];
+        $roles = ['god','admin', 'user'];
 
         foreach ($roles as $role) {
             Role::firstOrCreate(['name' => $role]);

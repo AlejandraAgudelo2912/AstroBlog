@@ -1,0 +1,65 @@
+<?php
+
+namespace App\Http\Controllers\User;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreObservationPointRequest;
+use App\Http\Requests\UpdateObservationPointRequest;
+use App\Models\ObservationPoint;
+
+class UserObserverPointController extends Controller
+{
+    public function index()
+    {
+        $observationPoints = ObservationPoint::all();
+        return view('user.map.index', compact('observationPoints'));
+    }
+
+//    public function show(ObservationPoint $observationPoint)
+//    {
+//        $this->authorize('view', $observationPoint);
+//
+//        return view('user.map.show', compact('observationPoint'));
+//    }
+//
+//    public function create()
+//    {
+//        return view('user.map.create');
+//    }
+//
+//    public function store(StoreObservationPointRequest $request)
+//    {
+//        $request->validated();
+//
+//        auth()->user()->observationPoints()->create($request->all());
+//
+//        return redirect()->route('user.observers.index')->with('success', 'Punto de observación agregado.');
+//    }
+//
+//    public function edit(ObservationPoint $observationPoint)
+//    {
+//        $this->authorize('update', $observationPoint);
+//
+//        return view('user.map.edit', compact('observationPoint'));
+//    }
+//
+//    public function update(UpdateObservationPointRequest $request, ObservationPoint $observationPoint)
+//    {
+//        $this->authorize('update', $observationPoint);
+//
+//        $request->validated();
+//
+//        $observationPoint->update($request->all());
+//
+//        return redirect()->route('user.observers.index')->with('success', 'Punto de observación actualizado.');
+//    }
+//
+//    public function destroy(ObservationPoint $observationPoint)
+//    {
+//        $this->authorize('delete', $observationPoint);
+//
+//        $observationPoint->delete();
+//
+//        return redirect()->route('user.observers.index')->with('success', 'Punto de observación eliminado.');
+//    }
+}

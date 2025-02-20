@@ -10,17 +10,87 @@
     <nav>
         <ul class="space-y-3">
             <li><a href="/" class="block hover:text-gray-400">{{__('Home')}}</a></li>
-            <li><a href="/posts" class="block hover:text-gray-400">{{__('See all Posts')}}</a></li>
             @auth
-                <li><a href="{{ route('posts.create') }}" class="block hover:text-gray-400">{{__('Create Post')}}</a></li>
-                <li><a href="{{ route('posts.my') }}" class="block hover:text-gray-400">{{__('My Posts')}}</a></li>
+                @role('admin')
+                    <li>
+                        <a href="{{ route('admin.posts.index') }}" class="block hover:text-gray-400">
+                            {{ __('See all Posts') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.posts.create') }}" class="block hover:text-gray-400">
+                            {{ __('Create a Post') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.categories.index') }}" class="block hover:text-gray-400">
+                            {{ __('See all Categories') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.tags.index') }}" class="block hover:text-gray-400">
+                            {{ __('See all Tags') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.map.index') }}" class="block hover:text-gray-400">
+                            {{ __('View Map') }}
+                        </a>
+                    </li>
+                @endrole
+                @role('user')
+                    <li>
+                        <a href="{{ route('user.posts.index') }}" class="block hover:text-gray-400">
+                            {{ __('See all Posts') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('user.posts.create') }}" class="block hover:text-gray-400">
+                            {{ __('Create a Post') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('user.categories.index') }}" class="block hover:text-gray-400">
+                            {{ __('See all Categories') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('user.tags.index') }}" class="block hover:text-gray-400">
+                            {{ __('See all Tags') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('user.map.index') }}" class="block hover:text-gray-400">
+                            {{ __('View Map') }}
+                        </a>
+                    </li>
+                @endrole
             @endauth
-            <li><a href="/categories" class="block hover:text-gray-400">{{__('Categories')}}</a></li>
-            <li><a href="/tags" class="block hover:text-gray-400">{{__('Tags')}}</a></li>
+            @guest
+                <li>
+                    <a href="{{ route('public.posts.index') }}" class="block hover:text-gray-400">
+                        {{ __('See all Posts') }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('public.categories.index') }}" class="block hover:text-gray-400">
+                        {{ __('See all Categories') }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('public.tags.index') }}" class="block hover:text-gray-400">
+                        {{ __('See all Tags') }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('public.map.index') }}" class="block hover:text-gray-400">
+                        {{ __('View Map') }}
+                    </a>
+                </li>
+            @endguest
             <li><a href="/nasa/picture" class="block hover:text-gray-400">{{__('NASA Picture of the Day')}}</a></li>
             <li><a href="/nasa/asteroids" class="block hover:text-gray-400">{{__('Near Asteroids to Earth')}}</a></li>
             <li><a href="/events" class="block hover:text-gray-400">{{__('Natural and Astronomical Events')}}</a></li>
-            <li><a href="/map" class="block hover:text-gray-400">{{__('Map of Observations')}}</a> </li>
         </ul>
     </nav>
 </aside>
