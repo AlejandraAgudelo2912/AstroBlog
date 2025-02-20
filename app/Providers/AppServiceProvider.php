@@ -2,12 +2,17 @@
 
 namespace App\Providers;
 
+use App\Events\NewCommentAddedEvent;
+use App\Listeners\NotifyPostAuthorOfCommentListener;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
+use App\Observers\CommentObserver;
 use App\Observers\UserObserver;
 use App\Policies\PostPolicy;
 use App\View\Components\BlogLayout;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -35,5 +40,8 @@ class AppServiceProvider extends ServiceProvider
         });
 
         User::observe(UserObserver::class);
+        Comment::observe(CommentObserver::class);
+
+        Event::listen(NewCommentAddedEvent::class, NotifyPostAuthorOfCommentListener::class);
     }
 }

@@ -14,10 +14,10 @@ use Illuminate\Support\Str;
 class UserCommentController extends Controller
 {
     use AuthorizesRequests;
-    public function index()
+    public function index(Post $post)
     {
-        $comments = Auth::user()->comments()->latest()->paginate(10);
-        return view('user.comments.index', compact('comments'));
+        $comments = auth()->user()->comments()->get();
+        return view('user.posts.show', compact('comments', 'post'));
     }
 
     public function show(Comment $comment)
@@ -37,13 +37,17 @@ class UserCommentController extends Controller
     {
         $request->validated();
 
+        $slug = Str::slug($request->title);
+
         Comment::create([
             'user_id' => Auth::id(),
             'post_id' => $post->id,
+            'title' => $request->title,
+            'slug' => $slug,
             'body' => $request->body,
         ]);
 
-        return redirect()->route('user.comments.index')->with('success', 'Comentario agregado.');
+        return redirect()->route('user.posts.comments.index', $post)->with('success', 'Comentario agregado.');
     }
 
     public function edit(Comment $comment)

@@ -4,7 +4,7 @@
             {{ __('Reply to Comment') }}
         </h2>
     </x-slot>
-    <form action="{{ route('posts.comments.reply', ['post' => $post, 'comment' => $comment]) }}" method="POST">
+    <form action="{{ route('user.posts.comments.reply', ['post' => $post, 'comment' => $comment]) }}" method="POST">
         @csrf
         <div>
             <label for="title">{{ __('Comment Title') }}</label>

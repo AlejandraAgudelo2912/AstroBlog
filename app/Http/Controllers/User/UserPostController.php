@@ -9,19 +9,20 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Str;
 
 class UserPostController extends Controller
 {
     use AuthorizesRequests;
     public function index()
     {
-        $posts = Post::where('user_id', auth()->id())->latest()->paginate(10);
+        $posts = Post::publicados()->get();
         return view('user.posts.index', compact('posts'));
     }
 
     public function create()
     {
-        $this->authorize('create', Post::class);
+        //$this->authorize('create', Post::class);
         $categories = Category::all();
         $tags = Tag::all();
         return view('user.posts.create', compact('categories', 'tags'));
@@ -34,7 +35,7 @@ class UserPostController extends Controller
         $post = Post::create([
             'user_id' => auth()->id(),
             'title' => $request->title,
-            'slug' => \Str::slug($request->title),
+            'slug' => Str::slug($request->title),
             'body' => $request->body,
             'category_id' => $request->category_id,
             'status' => $request->status,

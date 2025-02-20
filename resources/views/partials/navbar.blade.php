@@ -20,6 +20,15 @@
                         <a href="{{ route('login') }}" class="text-white hover:bg-indigo-800 px-3 py-2 rounded-md text-sm font-medium">{{__('Login')}}</a>
                         <a href="{{ route('register') }}" class="text-white hover:bg-indigo-800 px-3 py-2 rounded-md text-sm font-medium">{{__('Register')}}</a>
                     @else
+                        <a href="{{ route('user.notifications.index') }}" class="relative">
+                            🔔
+                            @if(auth()->user()->unreadNotifications->count() > 0)
+                                <span
+                                    class="absolute top-0 right-0 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                                    {{ auth()->user()->unreadNotifications->count() }}
+                                </span>
+                            @endif
+                        </a>
                         <div class="relative">
                             <button class="text-white hover:bg-indigo-800 px-3 py-2 rounded-md text-sm font-medium" id="user-menu-button" aria-haspopup="true">
                                 {{ auth()->user()->name }}

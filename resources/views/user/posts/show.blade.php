@@ -18,10 +18,10 @@
 
         @if($post->user_id === auth()->id())
             <div class="mt-4 flex space-x-4">
-                <a href="{{ route('posts.edit', $post) }}" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg shadow-md">
+                <a href="{{ route('user.posts.edit', $post) }}" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg shadow-md">
                     {{__('Edit')}}
                 </a>
-                <form method="POST" action="{{ route('posts.destroy', $post) }}">
+                <form method="POST" action="{{ route('user.posts.destroy', $post) }}">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg shadow-md" onclick="return confirm('{{__('¿Seguro que deseas eliminar esta publicación?')}}')">
@@ -36,8 +36,11 @@
         <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">{{ __('Comments') }}</h2>
 
         @auth
-            <a href="{{ route('posts.comments.create', ['post' => $post->slug]) }}" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md shadow-md">
+            <a href="{{ route('user.posts.comments.create', ['post' => $post->slug]) }}" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md shadow-md">
                 {{ __('Add a Comment') }}
+            </a>
+            <a href="{{ route('user.post.pdf', $post->id) }}" class="bg-blue-500 text-white px-4 py-2 rounded">
+                📄 Descargar PDF
             </a>
         @endauth
 
@@ -46,16 +49,16 @@
                 <p><strong class="text-indigo-700 dark:text-indigo-300">{{ $comment->user->name }}:</strong> {{ $comment->body }}</p>
 
                 <div class="flex items-center mt-2 space-x-2">
-                    <a href="{{ route('posts.comments.show', ['post' => $post, 'comment' => $comment]) }}" class="text-blue-500 hover:underline">
+                    <a href="{{ route('user.posts.comments.show', ['post' => $post, 'comment' => $comment]) }}" class="text-blue-500 hover:underline">
                         {{__('Show details')}}
                     </a>
 
                     @if(auth()->id() === $comment->user_id)
-                        <a href="{{ route('posts.comments.edit',  ['post' => $post, 'comment' => $comment]) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white px-3 py-1 rounded-md shadow-md">
+                        <a href="{{ route('user.posts.comments.edit',  ['post' => $post, 'comment' => $comment]) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white px-3 py-1 rounded-md shadow-md">
                             {{__('Edit')}}
                         </a>
 
-                        <form action="{{ route('posts.comments.destroy',  ['post' => $post, 'comment' => $comment]) }}" method="POST" class="d-inline">
+                        <form action="{{ route('user.posts.comments.destroy',  ['post' => $post, 'comment' => $comment]) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="bg-red-500 hover:bg-red-700 text-white px-3 py-1 rounded-md shadow-md" onclick="return confirm('{{__('¿Seguro que deseas eliminar este comentario?')}}')">

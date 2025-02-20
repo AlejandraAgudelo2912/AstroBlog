@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <form action="{{ route('posts.comments.store', $post) }}" method="POST">
+    <form action="{{ route('user.posts.comments.store', $post) }}" method="POST">
         @csrf
         @include('admin.comments.form-fields')
         <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">{{ __('Add Comment') }}</button>

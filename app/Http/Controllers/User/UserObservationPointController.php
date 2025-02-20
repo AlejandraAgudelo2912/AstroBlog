@@ -7,12 +7,12 @@ use App\Http\Requests\StoreObservationPointRequest;
 use App\Http\Requests\UpdateObservationPointRequest;
 use App\Models\ObservationPoint;
 
-class UserObserverPointController extends Controller
+class UserObservationPointController extends Controller
 {
     public function index()
     {
-        $observationPoints = ObservationPoint::all();
-        return view('user.map.index', compact('observationPoints'));
+        $points = ObservationPoint::all();
+        return view('user.map.index', compact('points'));
     }
 
 //    public function show(ObservationPoint $observationPoint)

@@ -12,7 +12,7 @@
                     {{ $comment->user->name }}:
                     {{ $comment->body }}
 
-                    <a href=" {{ route('posts.comments.replied', ['post' => $post, 'comment' => $comment]) }}" class="text-blue-500">{{__('Reply')}}</a>
+                    <a href=" {{ route('user.posts.comments.replied', ['post' => $post, 'comment' => $comment]) }}" class="text-blue-500">{{__('Reply')}}</a>
 
                     @if($comment->children->count())
                         <div class="ml-6 border-l-2 pl-3">

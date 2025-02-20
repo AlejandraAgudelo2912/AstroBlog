@@ -9,7 +9,7 @@
         @foreach($posts as $post)
             <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 border-l-4 border-indigo-500">
                 <h3 class="text-2xl font-semibold text-indigo-700 dark:text-indigo-300">
-                    <a href="/posts/{{ $post->slug }}" class="hover:underline">
+                    <a href="/user/posts/{{ $post->slug }}" class="hover:underline">
                         {{ $post->title }}
                     </a>
                 </h3>
@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="mt-4">
-                    <a href="/posts/{{ $post->slug }}" class="text-indigo-600 dark:text-indigo-400 font-bold hover:underline">
+                    <a href="/user/posts/{{ $post->slug }}" class="text-indigo-600 dark:text-indigo-400 font-bold hover:underline">
                         {{ __('See more') }}
                     </a>
                 </div>
