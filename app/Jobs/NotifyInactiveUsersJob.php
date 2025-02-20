@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Mail\InactiveUserNotificationMail;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
@@ -24,7 +25,7 @@ class NotifyInactiveUsersJob implements ShouldQueue
         $inactiveUsers = User::where('last_login_at', '<', Carbon::now()->subDays(20))->get();
 
         foreach ($inactiveUsers as $user) {
-            Mail::to($user->email)->send(new InactiveUserNotification($user));
+            Mail::to($user->email)->send(new InactiveUserNotificationMail($user));
         }
     }
 }

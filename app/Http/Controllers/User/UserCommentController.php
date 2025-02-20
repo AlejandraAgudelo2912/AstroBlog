@@ -7,11 +7,13 @@ use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Comment;
 use App\Models\Post;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class UserCommentController extends Controller
 {
+    use AuthorizesRequests;
     public function index()
     {
         $comments = Auth::user()->comments()->latest()->paginate(10);
@@ -27,6 +29,7 @@ class UserCommentController extends Controller
 
     public function create(Post $post)
     {
+        $this->authorize('create', Comment::class);
         return view('user.comments.create', compact('post'));
     }
 

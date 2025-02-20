@@ -8,10 +8,12 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Str;
 
 class AdminPostController extends Controller
 {
+    use AuthorizesRequests;
     public function index()
     {
         $posts = Post::latest()->paginate(10);
@@ -20,6 +22,7 @@ class AdminPostController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Post::class);
         $categories = Category::all();
         $tags = Tag::all();
         return view('admin.posts.create', compact('categories', 'tags'));
@@ -59,6 +62,7 @@ class AdminPostController extends Controller
 
     public function edit(Post $post)
     {
+        $this->authorize('update', $post);
         $categories = Category::all();
         $tags = Tag::all();
         return view('admin.posts.edit', compact('post', 'categories', 'tags'));
@@ -94,6 +98,7 @@ class AdminPostController extends Controller
 
     public function destroy(Post $post)
     {
+        $this->authorize('delete', $post);
         $post->delete();
         return redirect()->route('admin.posts.index')->with('success', 'Post eliminado correctamente.');
     }

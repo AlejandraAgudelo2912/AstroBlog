@@ -8,9 +8,11 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class UserPostController extends Controller
 {
+    use AuthorizesRequests;
     public function index()
     {
         $posts = Post::where('user_id', auth()->id())->latest()->paginate(10);
@@ -19,6 +21,7 @@ class UserPostController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Post::class);
         $categories = Category::all();
         $tags = Tag::all();
         return view('user.posts.create', compact('categories', 'tags'));
@@ -68,7 +71,6 @@ class UserPostController extends Controller
     public function update(UpdatePostRequest $request, Post $post)
     {
         $this->authorize('update', $post);
-
         $request->validated();
 
         $post->update([

@@ -7,31 +7,34 @@ use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Comment;
 use App\Models\Post;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Str;
 
 class AdminCommentController extends Controller
 {
+    use AuthorizesRequests;
     public function index()
     {
+        $this->authorize('viewAny', Comment::class);
         $comments = Comment::latest()->paginate(10);
         return view('admin.comments.index', compact('comments'));
     }
 
     public function show(Comment $comment)
     {
+        $this->authorize('view', $comment);
         return view('admin.comments.show', compact('comment'));
     }
 
     public function edit(Comment $comment)
     {
+        $this->authorize('update', $comment);
         return view('admin.comments.edit', compact('comment'));
     }
 
     public function update(UpdateCommentRequest $request, Comment $comment)
     {
-        $request->validate([
-            'body' => 'required|string|max:1000',
-        ]);
+        $request->validated();
 
         $comment->update([
             'body' => $request->body,
@@ -42,6 +45,7 @@ class AdminCommentController extends Controller
 
     public function destroy(Comment $comment)
     {
+        $this->authorize('delete', $comment);
         $comment->delete();
         return redirect()->route('admin.comments.index')->with('success', 'Comentario eliminado correctamente.');
     }
@@ -66,7 +70,8 @@ class AdminCommentController extends Controller
 
     public function create(Post $post, Comment $parent_id)
     {
-        return view('comments.create', compact('post', 'parent_id'));
+        $this->authorize('create', Comment::class);
+        return view('admin.comments.create', compact('post', 'parent_id'));
     }
 
 }
