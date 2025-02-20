@@ -2,31 +2,30 @@
 
 namespace App\Mail;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class InactiveUserNotificationMail extends Mailable
+class VerificationReminderMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public function __construct()
-    {
-    }
+    public function __construct(public $user) {}
 
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: '¡Te extrañamos en AstroBlog!',
+            subject: 'Recordatorio: Verifica tu correo electrónico',
         );
     }
 
     public function content(): Content
     {
         return new Content(
-            view: 'emails.inactive-user-notification',
+            view: 'emails.verification-reminder',
         );
     }
 

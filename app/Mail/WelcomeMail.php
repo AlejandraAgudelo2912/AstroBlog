@@ -19,16 +19,10 @@ class WelcomeMail extends Mailable
         $this->user = $user;
     }
 
-    public function build()
-    {
-        return $this->subject('¡Bienvenido a AstroBlog!')
-            ->view('emails.welcome');
-    }
-
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Welcome',
+            subject: '¡Bienvenido a AstroBlog!',
         );
     }
 

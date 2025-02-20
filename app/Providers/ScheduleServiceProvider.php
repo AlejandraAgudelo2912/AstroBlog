@@ -24,6 +24,7 @@ class ScheduleServiceProvider extends ServiceProvider
             $schedule->command('backup:database')->daily()->at('02:00');
             $schedule->command('all:clear')->daily();
             $schedule->command('observations:delete-old')->monthly();
+            $schedule->command('verification:send')->daily();
 
         });
     }
