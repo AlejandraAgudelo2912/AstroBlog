@@ -68,22 +68,22 @@
             @endauth
             @guest
                 <li>
-                    <a href="{{ route('public.posts.index') }}" class="block hover:text-gray-400">
+                    <a href="{{ route('posts.index') }}" class="block hover:text-gray-400">
                         {{ __('See all Posts') }}
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('public.categories.index') }}" class="block hover:text-gray-400">
+                    <a href="{{ route('categories.index') }}" class="block hover:text-gray-400">
                         {{ __('See all Categories') }}
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('public.tags.index') }}" class="block hover:text-gray-400">
+                    <a href="{{ route('tags.index') }}" class="block hover:text-gray-400">
                         {{ __('See all Tags') }}
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('public.map.index') }}" class="block hover:text-gray-400">
+                    <a href="{{ route('map.index') }}" class="block hover:text-gray-400">
                         {{ __('View Map') }}
                     </a>
                 </li>

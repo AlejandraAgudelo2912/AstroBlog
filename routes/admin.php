@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\AdminObserverPointController;
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('posts', AdminPostController::class);
-    Route::resource('post.comments', AdminCommentController::class);
+    Route::resource('posts.comments', AdminCommentController::class);
     Route::resource('categories', AdminCategoryController::class);
     Route::resource('tags', AdminTagController::class);
     Route::get('map', [AdminObserverPointController::class, 'index'])->name('map.index');
