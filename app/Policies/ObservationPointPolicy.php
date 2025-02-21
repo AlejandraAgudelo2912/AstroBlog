@@ -15,7 +15,7 @@ class ObservationPointPolicy
         if ($user->hasRole('god')) {
             return true;
         }
-        return false;
+        return null;
     }
 
     public function viewAny(User $user): bool

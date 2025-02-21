@@ -8,7 +8,7 @@ use App\Http\Controllers\Api\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth:sanctum'])->name('api.')->group(function () {
+Route::middleware(['auth:sanctum', 'force.json'])->name('api.')->group(function () {
     Route::get('posts', [PostController::class, 'index'])->name('posts.index');
     Route::post('posts', [PostController::class, 'store'])->name('posts.store');
     Route::get('posts/{post:id}', [PostController::class, 'show'])->name('posts.show');
