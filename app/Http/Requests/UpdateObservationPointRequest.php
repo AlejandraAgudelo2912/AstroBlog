@@ -9,7 +9,6 @@ class UpdateObservationPointRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => ['required', 'exists:users'],
             'name' => ['required'],
             'description' => ['nullable'],
             'latitude' => ['required', 'numeric'],

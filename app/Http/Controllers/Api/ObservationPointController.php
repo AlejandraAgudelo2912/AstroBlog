@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateObservationPointRequest;
 use App\Models\ObservationPoint;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class ObservationPointController extends Controller
 {
@@ -31,7 +32,15 @@ class ObservationPointController extends Controller
     {
         $request->validated();
 
-        $observationPoint = ObservationPoint::create($request->all());
+        $observationPoint = ObservationPoint::create(
+            [
+                'name' => $request->name,
+                'description' => $request->description,
+                'latitude' => $request->latitude,
+                'longitude' => $request->longitude,
+                'user_id' => Auth::id(),
+            ]
+        );
 
         return response()->json([
             'success' => true,
@@ -45,7 +54,14 @@ class ObservationPointController extends Controller
     {
         $request->validated();
 
-        $observationPoint->update($request->all());
+        $observationPoint->update(
+            [
+                'name' => $request->name,
+                'description' => $request->description,
+                'latitude' => $request->latitude,
+                'longitude' => $request->longitude
+            ]
+        );
 
         return response()->json([
             'success' => true,

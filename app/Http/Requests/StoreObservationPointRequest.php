@@ -13,7 +13,6 @@ class StoreObservationPointRequest extends FormRequest
             'description' => ['nullable'],
             'latitude' => ['required', 'numeric'],
             'longitude' => ['required', 'numeric'],
-            'user_id' => ['required', 'integer'],
         ];
     }
 

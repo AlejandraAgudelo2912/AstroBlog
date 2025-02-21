@@ -32,8 +32,12 @@ class CategoryController extends Controller
     {
         $request->validated();
 
+        $slug = str()->slug($request->name);
+
         $category = Category::create([
-            'name' => $request->name
+            'name' => $request->name,
+            'slug' => $slug,
+            'description' => $request->description
         ]);
 
         return response()->json([

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreTagRequest;
 use App\Http\Requests\UpdateTagRequest;
 use App\Models\Tag;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 
 class TagController extends Controller
 {
@@ -30,7 +31,9 @@ class TagController extends Controller
     {
         $request->validated();
 
+        $slug = Str::slug($request->name);
         $tag = Tag::create([
+            'slug' => $slug,
             'name' => $request->name
         ]);
 
@@ -45,7 +48,10 @@ class TagController extends Controller
     {
         $request->validated();
 
+        $slug = Str::slug($request->name);
+
         $tag->update([
+            'slug' => $slug,
             'name' => $request->name
         ]);
 
