@@ -5,7 +5,6 @@ use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 
 beforeEach(function () {
-
     $this->admin = User::factory()->create()->assignRole('admin');
     $this->user = User::factory()->create()->assignRole('user');
     $this->god = User::factory()->create()->assignRole('god');

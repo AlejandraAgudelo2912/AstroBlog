@@ -15,7 +15,7 @@ class CommentPolicy
         if ($user->hasRole('god')) {
             return true;
         }
-        return false;
+        return null;
     }
 
 

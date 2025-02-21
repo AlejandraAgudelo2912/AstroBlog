@@ -4,7 +4,7 @@ use App\Models\Post;
 
 it('shows post details', function () {
     //Arrange
-    $post = Post::factory()->create();
+    $post = Post::factory()->create(['status'=>'published','visibility'=>'public']);
 
     //Act
     $response=$this->get('/posts/'.$post->slug);
