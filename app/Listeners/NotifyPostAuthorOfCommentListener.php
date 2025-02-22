@@ -3,8 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\NewCommentAddedEvent;
-use App\Notifications\NewCommentNotification;
-use Illuminate\Support\Facades\Log;
+use App\Jobs\SendNotificationJob;
 
 class NotifyPostAuthorOfCommentListener
 {
@@ -18,7 +17,7 @@ class NotifyPostAuthorOfCommentListener
         $author = $post->user;
 
         if ($author && $author->id !== $event->comment->user_id) {
-            $author->notify(new NewCommentNotification($event->comment));
+            SendNotificationJob::dispatchAfterResponse($author, $event->comment);
         }
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Post;
+use App\Notifications\NewLikeNotification;
 use Livewire\Component;
 
 class LikeButton extends Component
@@ -20,6 +21,9 @@ class LikeButton extends Component
 
     public function toggleLike()
     {
+        if (!auth()->check()) {
+            return redirect()->route('login');
+        }
         if ($this->liked) {
             $this->post->decrement('likes');
             session()->forget("liked_posts.{$this->post->id}");
@@ -28,6 +32,10 @@ class LikeButton extends Component
             $this->post->increment('likes');
             session()->put("liked_posts.{$this->post->id}", true);
             $this->liked = true;
+        }
+
+        if ($this->post->user_id !== auth()->id()) {
+            $this->post->user->notify(new NewLikeNotification(auth()->user(), $this->post));
         }
 
         $this->likes = $this->post->likes;

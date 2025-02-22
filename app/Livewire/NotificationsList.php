@@ -8,6 +8,7 @@ use Livewire\Component;
 class NotificationsList extends Component
 {
     public $notifications;
+    public $showDropdown = false;
 
     protected $listeners = ['refreshNotifications' => 'loadNotifications'];
 
@@ -18,7 +19,7 @@ class NotificationsList extends Component
 
     public function loadNotifications()
     {
-        $this->notifications = Auth::user()->notifications;
+        $this->notifications = Auth::user()->unreadNotifications;
     }
 
     public function markAsRead($notificationId)
@@ -29,6 +30,17 @@ class NotificationsList extends Component
             $notification->markAsRead();
             $this->loadNotifications();
         }
+    }
+
+    public function markAllAsRead()
+    {
+        Auth::user()->unreadNotifications->markAsRead();
+        $this->loadNotifications();
+    }
+
+    public function toggleDropdown()
+    {
+        $this->showDropdown = !$this->showDropdown;
     }
     public function render()
     {

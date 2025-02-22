@@ -20,12 +20,14 @@ class ScheduleServiceProvider extends ServiceProvider
 
             $schedule->command('logs:clear')->daily();
             $schedule->command('posts:feature-most-liked')->daily();
-            $schedule->job(new NotifyInactiveUsersJob())->daily();
             $schedule->command('backup:database')->daily()->at('02:00');
             $schedule->command('all:clear')->daily();
             $schedule->command('observations:delete-old')->monthly();
             $schedule->command('verification:send')->daily();
 
+            $schedule->call(function () {
+                NotifyInactiveUsersJob::dispatchSync();
+            })->daily();
         });
     }
 }
