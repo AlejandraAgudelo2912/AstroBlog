@@ -7,6 +7,7 @@ use App\Http\Requests\StoreTagRequest;
 use App\Http\Requests\UpdateTagRequest;
 use App\Models\Tag;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Str;
 
 class AdminTagController extends Controller
 {
@@ -47,8 +48,9 @@ class AdminTagController extends Controller
     public function update(UpdateTagRequest $request, Tag $tag)
     {
         $request->validated();
-
-        $tag->update($request->only('name'));
+        $tag->update([
+            'name' => $request->name,
+        ]);
 
         return redirect()->route('admin.tags.index')->with('success', 'Etiqueta actualizada correctamente.');
     }

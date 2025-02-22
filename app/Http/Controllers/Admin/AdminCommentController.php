@@ -13,41 +13,42 @@ use Illuminate\Support\Str;
 class AdminCommentController extends Controller
 {
     use AuthorizesRequests;
-    public function index()
+    public function index(Post $post)
     {
         $this->authorize('viewAny', Comment::class);
         $comments = Comment::latest()->paginate(10);
-        return view('admin.comments.index', compact('comments'));
+        return view('admin.comments.index', compact('comments', 'post'));
     }
 
-    public function show(Comment $comment)
+    public function show(Post $post, Comment $comment)
     {
         $this->authorize('view', $comment);
-        return view('admin.comments.show', compact('comment'));
+        return view('admin.comments.show', compact('comment', 'post'));
     }
 
-    public function edit(Comment $comment)
+    public function edit(Post $post, Comment $comment)
     {
         $this->authorize('update', $comment);
-        return view('admin.comments.edit', compact('comment'));
+        return view('admin.comments.edit', compact('comment', 'post'));
     }
 
-    public function update(UpdateCommentRequest $request, Comment $comment)
+    public function update(Post $post,UpdateCommentRequest $request, Comment $comment)
     {
         $request->validated();
 
         $comment->update([
+            'title' => $request->title,
             'body' => $request->body,
         ]);
 
-        return redirect()->route('admin.comments.index')->with('success', 'Comentario actualizado correctamente.');
+        return redirect()->route('admin.posts.comments.index', ['post' => $post])->with('success', 'Comentario actualizado correctamente.');
     }
 
-    public function destroy(Comment $comment)
+    public function destroy(Post $post, Comment $comment)
     {
         $this->authorize('delete', $comment);
         $comment->delete();
-        return redirect()->route('admin.comments.index')->with('success', 'Comentario eliminado correctamente.');
+        return redirect()->route('admin.posts.comments.index', ['post' => $post])->with('success', 'Comentario eliminado correctamente.');
     }
 
     public function store(StoreCommentRequest $request, Post $post)
@@ -68,7 +69,7 @@ class AdminCommentController extends Controller
         return redirect()->route('posts.show', $post)->with('success', 'Comment created successfully');
     }
 
-    public function create(Post $post, Comment $parent_id)
+    public function create(Post $post, Comment $parent_id = null)
     {
         $this->authorize('create', Comment::class);
         return view('admin.comments.create', compact('post', 'parent_id'));
