@@ -16,7 +16,7 @@ Route::middleware(['auth'])->prefix('user')->name('user.')->group(function () {
     Route::resource('tags', UserTagController::class)->only(['index', 'show']);
     Route::get('map', [UserObservationPointController::class, 'index'])->name('map.index');
 
-    Route::get('/my-posts', [UserPostController::class, 'myPosts'])->name('user.posts.my');
+    Route::get('/my-posts', [UserPostController::class, 'myPosts'])->name('posts.my');
     Route::get('posts/{post}/comments/{comment}/reply', [UserCommentController::class, 'replied'])
         ->name('posts.comments.replied');
     Route::post('posts/{post}/comments/{comment}/reply', [UserCommentController::class, 'reply'])

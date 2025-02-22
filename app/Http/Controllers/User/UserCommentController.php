@@ -20,11 +20,11 @@ class UserCommentController extends Controller
         return view('user.posts.show', compact('comments', 'post'));
     }
 
-    public function show(Comment $comment)
+    public function show(Post $post, Comment $comment)
     {
         $this->authorize('view', $comment);
 
-        return view('user.comments.show', compact('comment'));
+        return view('user.comments.show', compact('comment', 'post'));
     }
 
     public function create(Post $post)
@@ -50,14 +50,14 @@ class UserCommentController extends Controller
         return redirect()->route('user.posts.comments.index', $post)->with('success', 'Comentario agregado.');
     }
 
-    public function edit(Comment $comment)
+    public function edit(Post $post, Comment $comment)
     {
         $this->authorize('update', $comment);
 
-        return view('user.comments.edit', compact('comment'));
+        return view('user.comments.edit', compact('comment', 'post'));
     }
 
-    public function update(UpdateCommentRequest $request, Comment $comment)
+    public function update(Post $post, UpdateCommentRequest $request, Comment $comment)
     {
         $this->authorize('update', $comment);
 
@@ -65,16 +65,16 @@ class UserCommentController extends Controller
 
         $comment->update(['body' => $request->body]);
 
-        return redirect()->route('user.comments.index')->with('success', 'Comentario actualizado.');
+        return redirect()->route('user.posts.comments.index', ['post' => $post])->with('success', 'Comentario actualizado.');
     }
 
-    public function destroy(Comment $comment)
+    public function destroy(Post $post, Comment $comment)
     {
         $this->authorize('delete', $comment);
 
         $comment->delete();
 
-        return redirect()->route('user.comments.index')->with('success', 'Comentario eliminado.');
+        return redirect()->route('user.posts.comments.index', ['post' => $post])->with('success', 'Comentario eliminado.');
     }
 
     public function reply(StoreCommentRequest $request, Post $post, Comment $comment)
