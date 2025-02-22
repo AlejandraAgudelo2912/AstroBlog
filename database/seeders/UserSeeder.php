@@ -26,26 +26,5 @@ class UserSeeder extends Seeder
         ]);
         $user->assignRole('user');
 
-        $adminAbilities = ['*'];
-
-        $userAbilities = [
-            'view-posts',
-            'create-posts',
-            'edit-own-posts',
-            'delete-own-posts',
-            'view-categories',
-            'view-tags',
-            'view-observation-points',
-            'create-observation-points',
-        ];
-
-        $adminToken = $admin->createToken('Admin Token', $adminAbilities)->plainTextToken;
-
-        $userToken = $user->createToken('User Token', $userAbilities)->plainTextToken;
-
-        $this->command->info("Admin Token: $adminToken");
-        $this->command->info("User Token: $userToken");
-
-        file_put_contents(storage_path('app/tokens.txt'), "Admin Token: $adminToken\nUser Token: $userToken\n");
     }
 }
