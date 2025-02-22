@@ -2,10 +2,11 @@
 
 namespace App\Livewire;
 
+use App\Models\ObservationPoint;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class ObservationPoint extends Component
+class ObservationPointForm extends Component
 {
     public $name, $description, $latitude, $longitude;
     public $showForm = false;
@@ -17,12 +18,12 @@ class ObservationPoint extends Component
         'longitude' => 'required|numeric',
     ];
 
-    protected $listeners = ['setCoordinates'];
+    protected $listeners = ['setCoordinates' => 'setCoordinates'];
 
     public function setCoordinates($latitude, $longitude)
     {
-        $this->latitude = $latitude;
-        $this->longitude = $longitude;
+        $this->latitude = is_numeric($latitude) ? floatval($latitude) : null;
+        $this->longitude = is_numeric($longitude) ? floatval($longitude) : null;
         $this->showForm = true;
     }
 
@@ -42,7 +43,7 @@ class ObservationPoint extends Component
         $this->validate();
 
         ObservationPoint::create([
-            'title' => $this->name,
+            'name' => $this->name,
             'description' => $this->description,
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
@@ -56,6 +57,6 @@ class ObservationPoint extends Component
     }
     public function render()
     {
-        return view('livewire.observation-point');
+        return view('livewire.observation-point-form');
     }
 }

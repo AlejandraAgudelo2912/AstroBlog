@@ -7,7 +7,7 @@
 
     <div id="map" style="height: 500px;" class="rounded-lg shadow-lg"></div>
 
-    @livewire('observation-point')
+    @livewire('observation-point-form')
 
     <script>
         window.mapPoints = @json($points);

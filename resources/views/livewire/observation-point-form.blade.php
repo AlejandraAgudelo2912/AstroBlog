@@ -27,12 +27,16 @@
                 <input type="text" wire:model="longitude" id="longitude" class="w-full p-2 border rounded mb-2" required>
 
                 <div class="flex justify-between mt-4">
-                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">
+                    <button
+                        wire:click="$dispatch('setCoordinates', { latitude: parseFloat(document.getElementById('latitude').value), longitude: parseFloat(document.getElementById('longitude').value) })"
+                        class="bg-blue-500 text-white px-4 py-2 rounded">
                         {{ __('Save Observation') }}
                     </button>
+
                     <button type="button" wire:click="hideObservationForm" class="bg-gray-500 text-white px-4 py-2 rounded">
                         {{ __('Cancel') }}
                     </button>
+
                 </div>
             </form>
         </div>

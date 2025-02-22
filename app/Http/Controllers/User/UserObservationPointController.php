@@ -15,7 +15,7 @@ class UserObservationPointController extends Controller
         return view('user.map.index', compact('points'));
     }
 
-//    public function show(ObservationPoint $observationPoint)
+//    public function show(ObservationPointForm $observationPoint)
 //    {
 //        $this->authorize('view', $observationPoint);
 //
@@ -36,14 +36,14 @@ class UserObservationPointController extends Controller
 //        return redirect()->route('user.observers.index')->with('success', 'Punto de observación agregado.');
 //    }
 //
-//    public function edit(ObservationPoint $observationPoint)
+//    public function edit(ObservationPointForm $observationPoint)
 //    {
 //        $this->authorize('update', $observationPoint);
 //
 //        return view('user.map.edit', compact('observationPoint'));
 //    }
 //
-//    public function update(UpdateObservationPointRequest $request, ObservationPoint $observationPoint)
+//    public function update(UpdateObservationPointRequest $request, ObservationPointForm $observationPoint)
 //    {
 //        $this->authorize('update', $observationPoint);
 //
@@ -54,7 +54,7 @@ class UserObservationPointController extends Controller
 //        return redirect()->route('user.observers.index')->with('success', 'Punto de observación actualizado.');
 //    }
 //
-//    public function destroy(ObservationPoint $observationPoint)
+//    public function destroy(ObservationPointForm $observationPoint)
 //    {
 //        $this->authorize('delete', $observationPoint);
 //

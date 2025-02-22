@@ -24,7 +24,7 @@ class AdminObserverPointController extends Controller
         return redirect()->route('admin.observers.index')->with('success', 'Punto de observación agregado.');
     }
 //
-//    public function update(UpdateObservationPointRequest $request, ObservationPoint $observationPoint)
+//    public function update(UpdateObservationPointRequest $request, ObservationPointForm $observationPoint)
 //    {
 //        $request->validated();
 //
@@ -33,7 +33,7 @@ class AdminObserverPointController extends Controller
 //        return redirect()->route('admin.observers.index')->with('success', 'Punto de observación actualizado.');
 //    }
 //
-//    public function destroy(ObservationPoint $observationPoint)
+//    public function destroy(ObservationPointForm $observationPoint)
 //    {
 //        $observationPoint->delete();
 //
