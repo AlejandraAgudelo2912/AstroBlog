@@ -10,7 +10,7 @@ class PageHomeController extends Controller
 {
     public function index()
     {
-        $topPosts = Post::featured()->latest()->take(5)->get();
+        $topPosts = Post::topLiked(3)->get();
 
         return view('welcome', compact('topPosts'));
     }

@@ -23,7 +23,6 @@ class Post extends Model
         'likes',
         'cover_image',
         'category_id',
-        'is_featured',
     ];
 
     protected $dates = ['deleted_at'];
@@ -53,19 +52,15 @@ class Post extends Model
         return $this->belongsToMany(Tag::class);
     }
 
-    public function likedByUsers()
-    {
-        return $this->belongsToMany(User::class, 'post_likes')->withTimestamps();
-    }
 
     public function scopePublicados($query)
     {
         return $query->where('status', 'published')->where('visibility', 'public');
     }
 
-    public function scopeFeatured($query)
+    public function scopeTopLiked($query, $limit = 3)
     {
-        return $query->where('is_feature', true);
+        return $query->publicados()->orderByDesc('likes')->limit($limit);
     }
 
 }

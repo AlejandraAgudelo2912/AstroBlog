@@ -34,14 +34,13 @@
     <div class="max-w-4xl mx-auto mt-8">
         <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">{{ __('Comments') }}</h2>
 
-        @auth
             <a href="{{ route('user.posts.comments.create', ['post' => $post->slug]) }}" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md shadow-md">
                 {{ __('Add a Comment') }}
             </a>
             <a href="{{ route('user.post.pdf', $post->id) }}" class="bg-blue-500 text-white px-4 py-2 rounded">
                 📄 Descargar PDF
             </a>
-        @endauth
+
 
         @foreach ($post->comments as $comment)
             <div class="bg-gray-100 dark:bg-gray-700 shadow-lg rounded-lg p-4 mt-4">

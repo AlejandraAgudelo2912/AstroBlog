@@ -14,6 +14,10 @@ class PostFactory extends Factory
 
     public function definition(): array
     {
+        $storagePath = storage_path('app/public/posts');
+
+        $imagePath = fake()->image($storagePath, 640, 480, null, false);
+
         return [
             'user_id'=>User::factory(),
             'category_id'=>Category::factory(),
@@ -23,7 +27,7 @@ class PostFactory extends Factory
             'status' => $this->faker->randomElement(['published', 'draft', 'archived']),
             'visibility' => $this->faker->randomElement(['public', 'private']),
             'likes' => $this->faker->numberBetween(0, 100),
-            'cover_image' => $this->faker->imageUrl(),
+            'cover_image' =>'posts/' . basename($imagePath),
             'published_at' => $this->faker->dateTimeBetween('now', '+1 year'),
         ];
     }

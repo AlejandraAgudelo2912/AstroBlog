@@ -105,7 +105,8 @@ it('updates a post successfully', function () {
     $this->assertDatabaseHas('posts', ['title' => 'Updated Post Title']);
 });
 
-it('deletes a post successfully', function () {
+it('soft deletes a post', function () {
+
     // Arrange
     $post = Post::factory()->create();
 
@@ -114,5 +115,5 @@ it('deletes a post successfully', function () {
 
     // Assert
     $response->assertRedirect(route('admin.posts.index'));
-    $this->assertDatabaseMissing('posts', ['id' => $post->id]);
+    $this->assertSoftDeleted('posts', ['id' => $post->id]);
 });

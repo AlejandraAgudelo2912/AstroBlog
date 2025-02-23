@@ -3,13 +3,30 @@
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div class="relative flex items-center justify-between h-16">
             <div class="flex-1 flex items-center sm:items-stretch sm:justify-start">
-                <div class="flex-shrink-0">
+                <div class="flex items-center space-x-4">
                     <!-- Enlaces a otras páginas -->
                     @hasanyrole('god|admin')
-                        @livewire('admin-panel')
+                    @livewire('admin-panel')
                     @endhasanyrole
 
+                    @auth
+                        <a href="{{ route('user.map.index') }}" class="text-white hover:bg-indigo-800 px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                            <img class="h-8 w-auto" src="{{ asset('images/map.png') }}" alt="Logo">
+                        </a>
+
+                    @role('user')
+                        <a href="{{ route('user.posts.create') }}" class="text-white hover:bg-indigo-800 px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                            <img class="h-8 w-auto" src="{{ asset('images/post.png') }}" alt="Logo">
+                        </a>
+                    @endrole
+                        @role('admin')
+                        <a href="{{ route('admin.posts.create') }}" class="text-white hover:bg-indigo-800 px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                            <img class="h-8 w-auto" src="{{ asset('images/post.png') }}" alt="Logo">
+                        </a>
+                    @endrole
+                    @endauth
                 </div>
+
             </div>
 
             <div class="absolute top-0 right-0 px-6 py-4 sm:block sm:ml-6">
