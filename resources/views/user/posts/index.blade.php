@@ -32,6 +32,13 @@
                 </div>
 
                 <div class="mt-4">
+                    <p>
+                        <a href="{{ route('user.profile', $post->user) }}" class="text-indigo-600 dark:text-indigo-400 font-bold hover:underline">
+                            {{ $post->user->name }}
+                        </a>
+                    </p>
+
+                <div class="mt-4">
                     <a href="/user/posts/{{ $post->slug }}" class="text-indigo-600 dark:text-indigo-400 font-bold hover:underline">
                         {{ __('See more') }}
                     </a>

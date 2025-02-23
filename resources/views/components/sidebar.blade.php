@@ -11,7 +11,7 @@
         <ul class="space-y-3">
             <li><a href="/" class="block hover:text-gray-400">{{__('Home')}}</a></li>
             @auth
-                @role('admin')
+                @hasanyrole('admin|god')
                     <li>
                         <a href="{{ route('admin.posts.index') }}" class="block hover:text-gray-400">
                             {{ __('See all Posts') }}
@@ -37,7 +37,7 @@
                             {{ __('View Map') }}
                         </a>
                     </li>
-                @endrole
+                @endhasanyrole
                 @role('user')
                     <li>
                         <a href="{{ route('user.posts.index') }}" class="block hover:text-gray-400">

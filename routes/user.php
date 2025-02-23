@@ -3,7 +3,6 @@
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\User\UserCategoryController;
 use App\Http\Controllers\User\UserCommentController;
-use App\Http\Controllers\User\UserNotificationController;
 use App\Http\Controllers\User\UserObservationPointController;
 use App\Http\Controllers\User\UserPostController;
 use App\Http\Controllers\User\UserTagController;
@@ -23,8 +22,5 @@ Route::middleware(['auth'])->prefix('user')->name('user.')->group(function () {
         ->name('posts.comments.reply');
 
     Route::get('/post/{post}/pdf', [PdfController::class, 'generatePostPDF'])->name('post.pdf');
-
-    Route::get('/notifications', [UserNotificationController::class, 'index'])->name('notifications.index');
-    Route::post('/notifications/{id}/mark-as-read', [UserNotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
 
 });

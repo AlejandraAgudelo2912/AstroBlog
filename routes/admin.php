@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminTagController;
 use App\Http\Controllers\Admin\AdminObserverPointController;
 
-Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'role:admin|god'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('posts', AdminPostController::class);
     Route::resource('posts.comments', AdminCommentController::class);
     Route::resource('categories', AdminCategoryController::class);

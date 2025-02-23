@@ -4,7 +4,7 @@
             <a href="{{ route('login') }}">
                 <x-heart-unlike class="w-6 h-6 text-gray-500" />
             </a>
-        @elseguest
+        @else
             @if($liked)
                 <x-heart-like class="w-6 h-6 text-red-500" />
             @else
