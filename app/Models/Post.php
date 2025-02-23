@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $fillable = [
         'user_id',
         'title',
@@ -23,6 +25,8 @@ class Post extends Model
         'category_id',
         'is_featured',
     ];
+
+    protected $dates = ['deleted_at'];
 
     public function getRouteKeyName()
     {
@@ -62,5 +66,14 @@ class Post extends Model
     public function scopeFeatured($query)
     {
         return $query->where('is_feature', true);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('withoutDeleted', function (Builder $query) {
+            return $query->whereNull('deleted_at');
+        });
     }
 }

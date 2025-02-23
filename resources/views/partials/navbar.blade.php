@@ -5,11 +5,9 @@
             <div class="flex-1 flex items-center sm:items-stretch sm:justify-start">
                 <div class="flex-shrink-0">
                     <!-- Enlaces a otras páginas -->
-                    @role('god')
-                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
-                            {{ __('Gestionar Usuarios') }}
-                        </x-nav-link>
-                    @endrole
+                    @hasanyrole('god|admin')
+                        @livewire('admin-panel')
+                    @endhasanyrole
 
                 </div>
             </div>

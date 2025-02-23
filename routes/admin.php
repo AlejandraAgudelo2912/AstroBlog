@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\PdfController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminPostController;
@@ -7,6 +8,8 @@ use App\Http\Controllers\Admin\AdminCommentController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminTagController;
 use App\Http\Controllers\Admin\AdminObserverPointController;
+Route::get('admin/posts/list', [AdminPostController::class, 'list'])->name('admin.posts.list');
+Route::get('admin/users/list', [AdminUserController::class, 'list'])->name('admin.users.list');
 
 Route::middleware(['auth', 'role:admin|god'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('posts', AdminPostController::class);

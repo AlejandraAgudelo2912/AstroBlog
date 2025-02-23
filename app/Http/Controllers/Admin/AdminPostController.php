@@ -102,4 +102,25 @@ class AdminPostController extends Controller
         $post->delete();
         return redirect()->route('admin.posts.index')->with('success', 'Post eliminado correctamente.');
     }
+
+    public function restore($id)
+    {
+        $post = Post::withTrashed()->findOrFail($id);
+        $post->restore();
+
+        return response()->json(['message' => 'Post restaurado correctamente.'], 200);
+    }
+    public function forceDelete($id)
+    {
+        $post = Post::withTrashed()->findOrFail($id);
+        $post->forceDelete();
+
+        return response()->json(['message' => 'Post eliminado permanentemente.'], 200);
+    }
+
+    public function list()
+    {
+        $posts = Post::all();
+        return view('admin.posts.list', compact('posts'));
+    }
 }
