@@ -16,11 +16,10 @@ class CategoryResource extends JsonResource
             'name' => $this->name,
             'slug' => $this->slug,
             'description' => $this->description,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'posts_count' => $this->posts_count,
+            'created_at' => $this->created_at->toDateTimeString(),
+            'updated_at' => $this->updated_at->toDateTimeString(),
 
-            'posts' => PostResource::collection($this->whenLoaded('posts')),
+            'posts' => PostResource::collection($this->whenLoaded('posts'))
         ];
     }
 }

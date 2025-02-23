@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
+use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::findOrFail($id);
-        return response()->json($post->load(['user', 'category', 'tags', 'comments']));
+        return new PostResource($post);
     }
 
     public function store(StorePostRequest $request)
@@ -49,7 +50,10 @@ class PostController extends Controller
             $post->tags()->sync($request->tags);
         }
 
-        return response()->json(['message' => 'Post creado con éxito', 'post' => $post], 201);
+        return response()->json([
+            'message' => 'Post creado con éxito',
+            'post' => new PostResource($post)
+        ], 201);
     }
 
     public function update(Request $request, $id)
@@ -76,8 +80,8 @@ class PostController extends Controller
         $post->update($validated);
 
         return response()->json([
-            'message' => ' Post actualizado con éxito',
-            'post' => $post->refresh()
+            'message' => 'Post actualizado con éxito',
+            'post' => new PostResource($post->refresh())
         ]);
     }
     public function destroy($id)

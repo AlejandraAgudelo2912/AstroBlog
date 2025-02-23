@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PdfController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminCommentController;
@@ -20,4 +21,7 @@ Route::middleware(['auth', 'role:admin|god'])->prefix('admin')->name('admin.')->
         ->name('posts.comments.replied');
     Route::post('posts/{post}/comments/{comment}/reply', [AdminCommentController::class, 'reply'])
         ->name('posts.comments.reply');
+
+    Route::get('users/pdf', [PdfController::class, 'generateUsersReport'])->name('users.pdf');
+
 });

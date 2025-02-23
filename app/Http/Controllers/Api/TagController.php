@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTagRequest;
 use App\Http\Requests\UpdateTagRequest;
+use App\Http\Resources\TagResource;
 use App\Models\Tag;
 use Illuminate\Http\Response;
 use Illuminate\Support\Str;
@@ -13,18 +14,12 @@ class TagController extends Controller
 {
     public function index()
     {
-        return response()->json([
-            'success' => true,
-            'tags' => Tag::all()
-        ], Response::HTTP_OK);
+        return TagResource::collection(Tag::all());
     }
 
     public function show(Tag $tag)
     {
-        return response()->json([
-            'success' => true,
-            'tag' => $tag
-        ], Response::HTTP_OK);
+        return new TagResource($tag);
     }
 
     public function store(StoreTagRequest $request)
@@ -40,7 +35,7 @@ class TagController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Tag creado correctamente.',
-            'tag' => $tag
+            'tag' => new TagResource($tag)
         ], Response::HTTP_CREATED);
     }
 
@@ -58,7 +53,7 @@ class TagController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Tag actualizado correctamente.',
-            'tag' => $tag
+            'tag' => new TagResource($tag)
         ], Response::HTTP_OK);
     }
 

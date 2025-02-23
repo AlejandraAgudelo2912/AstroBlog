@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -13,18 +14,12 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return response()->json([
-            'success' => true,
-            'categories' => Category::all()
-        ], Response::HTTP_OK);
+        return CategoryResource::collection(Category::all());
     }
 
     public function show(Category $category)
     {
-        return response()->json([
-            'success' => true,
-            'category' => $category
-        ], Response::HTTP_OK);
+        return new CategoryResource($category);
     }
 
 
@@ -43,7 +38,7 @@ class CategoryController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Categoría creada correctamente.',
-            'category' => $category
+            'category' => new CategoryResource($category)
         ], Response::HTTP_CREATED);
     }
 
@@ -58,7 +53,7 @@ class CategoryController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Categoría actualizada correctamente.',
-            'category' => $category
+            'category' => new CategoryResource($category)
         ], Response::HTTP_OK);
     }
 

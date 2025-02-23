@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
+use App\Http\Resources\CommentResource;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Response;
@@ -22,12 +23,9 @@ class CommentController extends Controller
             ], Response::HTTP_NOT_FOUND);
         }
 
-        $comments = Comment::where('post_id', $post_id)->get();
+        Comment::where('post_id', $post_id)->get();
 
-        return response()->json([
-            'success' => true,
-            'comments' => $comments
-        ], Response::HTTP_OK);
+        return CommentResource::collection($post->comments);
     }
 
     public function show($post,$id)
@@ -36,20 +34,7 @@ class CommentController extends Controller
             ->where('id', $id)
             ->firstOrFail();
 
-        return response()->json([
-            'success' => true,
-            'comment' => [
-                'id' => $comment->id,
-                'post_id' => $comment->post_id,
-                'user_id' => $comment->user_id,
-                'title' => $comment->title,
-                'slug' => $comment->slug,
-                'body' => $comment->body,
-                'created_at' => $comment->created_at,
-                'updated_at' => $comment->updated_at,
-                'parent_id' => $comment->parent_id
-            ]
-        ], Response::HTTP_OK);
+        return new CommentResource($comment);
     }
 
     public function store(StoreCommentRequest $request)
@@ -82,7 +67,7 @@ class CommentController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Comentario creado correctamente.',
-            'comment' => $comment
+            'comment' => new CommentResource($comment)
         ], Response::HTTP_CREATED);
     }
     public function update(UpdateCommentRequest $request, $post_id, $comment_id)
@@ -112,7 +97,7 @@ class CommentController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Comentario actualizado correctamente.',
-            'comment' => $comment
+            'comment' => new CommentResource($comment)
         ], Response::HTTP_OK);
     }
 

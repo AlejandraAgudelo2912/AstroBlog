@@ -13,20 +13,17 @@ class CommentResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'post_id' => $this->post_id,
+            'user' => [
+                'id' => $this->user->id,
+                'name' => $this->user->name,
+            ],
             'title' => $this->title,
             'slug' => $this->slug,
             'body' => $this->body,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'children_count' => $this->children_count,
-
-            'user_id' => $this->user_id,
-            'post_id' => $this->post_id,
             'parent_id' => $this->parent_id,
-
-            'children' => CommentResource::collection($this->whenLoaded('children')),
-            'parent' => new CommentResource($this->whenLoaded('parent')),
-            'post' => new PostResource($this->whenLoaded('post')),
+            'created_at' => $this->created_at->toDateTimeString(),
+            'updated_at' => $this->updated_at->toDateTimeString(),
         ];
     }
 }

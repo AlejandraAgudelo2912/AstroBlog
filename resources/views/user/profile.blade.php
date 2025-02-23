@@ -8,6 +8,13 @@
             <p>Miembro desde: {{ $user->created_at->format('d M, Y') }}</p>
         </div>
 
+        <div class="mt-4">
+            <h2 class="text-xl font-semibold">Estadísticas</h2>
+            <p>Publicaciones: {{ $user->posts_count }}</p>
+            <p>Comentarios: {{ $user->comments_count }}</p>
+            <p>Última conexión: {{ $user->last_login_at ? $user->last_login_at->format('d M, Y H:i') : 'Nunca' }}</p>
+        </div>
+
         <div class="mt-6">
             <a href="{{ route('user.byPosts', $user) }}" class="bg-blue-500 text-white px-4 py-2 rounded">
                 Ver Publicaciones
