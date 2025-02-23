@@ -18,17 +18,17 @@
 
                 @role('god')
                     <a href="{{route('users.index')}}" :active="request()->routeIs('users.index')"><img src="{{ asset('images/manage-users.png') }}" alt="Admin Panel" class="h-6 w-6 inline-block">
-                                {{ __('Gestionar Usuarios') }}
+                                {{ __('Manage Users') }}
                     </a>
                 @endrole
                 @role('admin')
                     <a href="{{route('admin.users.list')}}" >
                         <img src="{{ asset('images/users-list.png') }}" alt="Admin Panel" class="h-6 w-6 inline-block">
-                        {{ __('Lista de Usuarios') }}
+                        {{ __('Users List') }}
                     </a>
                 <a href="{{route('admin.posts.list')}}" >
                     <img src="{{ asset('images/posts-list.png') }}" alt="Admin Panel" class="h-6 w-6 inline-block">
-                    {{ __('Lista de Posts') }}
+                    {{ __('Posts List') }}
                 </a>
                 @endrole
             </div>

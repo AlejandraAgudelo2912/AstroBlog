@@ -7,7 +7,7 @@
 
     @if (session()->has('success'))
         <div class="bg-green-500 text-white p-3 rounded-lg mb-4 shadow-md">
-            ✅ {{ session('success') }}
+            {{ session('success') }}
         </div>
     @endif
 
@@ -42,7 +42,7 @@
                             </button>
                         @else
                             {{-- Botones para activos --}}
-                            <a href="{{ route('admin.posts.edit', $post->id) }}"
+                            <a href="{{ route('admin.posts.edit', $post) }}"
                                class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg shadow-md transition">
                                 {{ __('Edit') }}
                             </a>

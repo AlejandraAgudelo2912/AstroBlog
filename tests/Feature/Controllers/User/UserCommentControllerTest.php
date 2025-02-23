@@ -114,7 +114,7 @@ it('deletes a comment successfully', function () {
     // Assert
     $response->assertRedirect(route('user.posts.comments.index',['post' => $post]));
     $this->assertDatabaseMissing('comments', ['id' => $comment->id]);
-})->skip('This test is failing because of the middleware in the controller');
+})->skip('skip');
 
 it('renders the reply page for a comment', function () {
     // Arrange

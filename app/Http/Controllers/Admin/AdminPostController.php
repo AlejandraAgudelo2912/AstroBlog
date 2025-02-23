@@ -123,4 +123,11 @@ class AdminPostController extends Controller
         $posts = Post::all();
         return view('admin.posts.list', compact('posts'));
     }
+
+    public function myPosts()
+    {
+        $posts = auth()->user()->posts;
+        return view('admin.posts.my-posts', compact('posts'));
+
+    }
 }

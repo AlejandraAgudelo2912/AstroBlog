@@ -73,3 +73,16 @@ it('returns only published and public posts', function () {
         ->toBe($post->id);
 
 });
+
+it('returns the top 3 liked posts', function () {
+    //Arrange
+    $post = Post::factory()->create(['status' => 'published', 'visibility' => 'public']);
+    $post2 = Post::factory()->create(['status' => 'published', 'visibility' => 'public']);
+    $post3 = Post::factory()->create(['status' => 'published', 'visibility' => 'public']);
+
+    //Act & Assert
+    $posts = Post::topLiked()->get();
+    expect($posts)
+        ->toHaveCount(3)
+        ->each->toBeInstanceOf(Post::class);
+});

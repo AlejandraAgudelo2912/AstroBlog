@@ -116,4 +116,4 @@ it('deletes a comment successfully', function () {
     // Assert
     $response->assertRedirect(route('admin.posts.comments.index', ['post' => $post]));
     $this->assertDatabaseMissing('comments', ['id' => $comment->id]);
-})->skip('This test is failing because the route is not defined in the routes file.');
+})->skip('skip');

@@ -48,6 +48,6 @@ class RolesAndPermissionsSeeder extends Seeder
             ]
         );
 
-        $testUser->assignRole('god');
+        $testUser->syncRoles('god');
     }
 }

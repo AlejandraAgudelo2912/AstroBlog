@@ -47,7 +47,7 @@
         {{ __('Create Post') }}
     </a>
 
-    <a href="{{ route('admin.posts.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg transition">
+    <a href="{{ route('admin.posts.my') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg transition">
         {{ __('My Posts') }}
     </a>
 </div>

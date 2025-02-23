@@ -13,7 +13,7 @@ class RoleController extends Controller
         $users = User::with('roles')->get();
         $roles = Role::all()->pluck('name');
 
-        return view('admin.manage-users', compact('users', 'roles'));
+        return view('god.users.index', compact('users', 'roles'));
     }
 
     public function assignRole(Request $request)

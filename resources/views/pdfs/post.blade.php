@@ -39,6 +39,7 @@
             text-align: center;
             color: #ff69b4;
             font-size: 26px;
+            margin-top: 80px;
         }
 
         .info {
@@ -126,7 +127,7 @@
     </div>
 
     <div class="stats">
-        <div class="likes"> {{ $post->likes}} Likes</div>
+        <div class="likes"> {{ $post->likes }} Likes</div>
         <div class="comments">{{ is_countable($post->comments) ? $post->comments->count() : 0 }} Comentarios</div>
     </div>
 

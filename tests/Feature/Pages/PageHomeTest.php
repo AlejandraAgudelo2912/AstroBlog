@@ -33,4 +33,9 @@ it('shows profile and logout buttons when logged in', function () {
         ->assertDontSee('register');
 });
 
-
+it('shows posts when there are posts', function () {
+    //Arrange
+    $response = $this->get('/');
+    //Act & Assert
+    $response->assertSee('Posts');
+});

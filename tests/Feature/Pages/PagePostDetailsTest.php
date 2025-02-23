@@ -12,6 +12,6 @@ it('shows post details', function () {
     //Assert
     $response->assertStatus(200)
         ->assertSee($post->title)
-        ->assertSee($post->body);
-
+        ->assertSee($post->body)
+        ->assertSee($post->user->name);
 });

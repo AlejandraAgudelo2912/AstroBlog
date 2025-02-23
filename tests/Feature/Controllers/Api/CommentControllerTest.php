@@ -57,7 +57,7 @@ it('creates a new comment', function () {
         ]);
 
     $this->assertDatabaseHas('comments', ['title' => 'New Comment']);
-})->skip('No se puede crear un comentario sin autenticación.');
+})->skip('skip');
 
 it('updates an existing comment', function () {
     // Arrange
@@ -102,4 +102,4 @@ it('deletes a comment', function () {
         ]);
 
     $this->assertDatabaseMissing('comments', ['id' => $comment->id]);
-})->skip('No se puede eliminar un comentario sin autenticación.');
+})->skip('skip');
