@@ -12,11 +12,6 @@ class PostList extends Component
 
     public $showTrashed = false; // Alternar entre posts normales y eliminados
 
-    public function toggleTrashed()
-    {
-        $this->showTrashed = !$this->showTrashed;
-    }
-
     public function restore($postId)
     {
         $post = Post::onlyTrashed()->findOrFail($postId);
@@ -40,9 +35,7 @@ class PostList extends Component
 
     public function render()
     {
-        $posts = $this->showTrashed
-            ? Post::onlyTrashed()->paginate(10)
-            : Post::paginate(10);
+        $posts = Post::withTrashed()->with('user')->paginate(10);
 
         return view('livewire.post-list', compact('posts'));
     }

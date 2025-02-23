@@ -68,12 +68,4 @@ class Post extends Model
         return $query->where('is_feature', true);
     }
 
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::addGlobalScope('withoutDeleted', function (Builder $query) {
-            return $query->whereNull('deleted_at');
-        });
-    }
 }
