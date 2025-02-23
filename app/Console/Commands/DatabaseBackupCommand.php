@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -15,13 +14,24 @@ class DatabaseBackupCommand extends Command
 
     public function handle(): void
     {
-        $tables = DB::select('SHOW TABLES');
-        $databaseName = config('database.connections.mysql.database');
+        $connection = config('database.default');
+
+        if ($connection === 'sqlite') {
+            $tables = DB::select("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'");
+        } else {
+            $tables = DB::select('SHOW TABLES');
+        }
+
+        if (empty($tables)) {
+            $this->warn("No se encontraron tablas en la base de datos.");
+            return;
+        }
 
         $backupData = [];
 
         foreach ($tables as $table) {
-            $tableName = reset($table);
+            $tableName = $connection === 'sqlite' ? $table->name : reset($table);
+
             $backupData[$tableName] = DB::table($tableName)->get();
         }
 
@@ -30,6 +40,5 @@ class DatabaseBackupCommand extends Command
         Storage::disk('local')->put($backupPath, json_encode($backupData, JSON_PRETTY_PRINT));
 
         $this->info("Backup saved at: storage/app/{$backupPath}");
-
     }
 }

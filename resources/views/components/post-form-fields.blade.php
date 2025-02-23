@@ -39,7 +39,7 @@
     <input
         type="date"
         name="published_at"
-        value="{{ old('published_at', $post->published_at ) }}"
+        value="{{ old('published_at', $post->published_at ?? '' ) }}"
         class="block w-full mt-1 p-2 border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white">
 </div>
 

@@ -17,10 +17,7 @@ class ObservationPointResource extends JsonResource
             'description' => $this->description,
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
-            'user' => [
-                'id' => $this->user->id,
-                'name' => $this->user->name,
-            ],
+            'user_id' => $this->user_id,
             'created_at' => $this->created_at->toDateTimeString(),
             'updated_at' => $this->updated_at->toDateTimeString(),
         ];

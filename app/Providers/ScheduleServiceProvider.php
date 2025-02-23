@@ -19,7 +19,6 @@ class ScheduleServiceProvider extends ServiceProvider
             $schedule = $this->app->make(Schedule::class);
 
             $schedule->command('logs:clear')->daily();
-            $schedule->command('posts:feature-most-liked')->daily();
             $schedule->command('backup:database')->daily()->at('02:00');
             $schedule->command('all:clear')->daily();
             $schedule->command('verification:send')->daily();
