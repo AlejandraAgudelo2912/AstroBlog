@@ -10,12 +10,14 @@ class PublicTagController extends Controller
     public function index()
     {
         $tags = Tag::all();
+
         return view('public.tags.index', compact('tags'));
     }
 
     public function show(Tag $tag)
     {
         $posts = $tag->posts()->publicados()->latest()->paginate(10);
+
         return view('public.tags.show', compact('tag', 'posts'));
     }
 }

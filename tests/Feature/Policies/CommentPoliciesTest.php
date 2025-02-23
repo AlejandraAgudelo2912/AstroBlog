@@ -38,7 +38,6 @@ it('prevents unauthorized users from creating comments', function () {
     expect(Gate::forUser(null)->allows('create', Comment::class))->toBeFalse();
 });
 
-
 it('allows the owner to update their own comment', function () {
     expect(Gate::forUser($this->commentOwner)->allows('update', $this->comment))->toBeTrue();
 });

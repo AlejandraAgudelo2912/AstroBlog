@@ -15,9 +15,9 @@ class CommentPolicy
         if ($user->hasRole('god')) {
             return true;
         }
+
         return null;
     }
-
 
     public function viewAny(User $user): bool
     {

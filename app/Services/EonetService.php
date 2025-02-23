@@ -6,11 +6,9 @@ use Illuminate\Support\Facades\Http;
 
 class EonetService
 {
-    protected $baseUrl = "https://eonet.gsfc.nasa.gov/api/v3/events";
+    protected $baseUrl = 'https://eonet.gsfc.nasa.gov/api/v3/events';
 
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     public function getEvents()
     {

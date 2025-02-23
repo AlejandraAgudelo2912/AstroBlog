@@ -29,13 +29,13 @@ class TagController extends Controller
         $slug = Str::slug($request->name);
         $tag = Tag::create([
             'slug' => $slug,
-            'name' => $request->name
+            'name' => $request->name,
         ]);
 
         return response()->json([
             'success' => true,
             'message' => 'Tag creado correctamente.',
-            'tag' => new TagResource($tag)
+            'tag' => new TagResource($tag),
         ], Response::HTTP_CREATED);
     }
 
@@ -47,13 +47,13 @@ class TagController extends Controller
 
         $tag->update([
             'slug' => $slug,
-            'name' => $request->name
+            'name' => $request->name,
         ]);
 
         return response()->json([
             'success' => true,
             'message' => 'Tag actualizado correctamente.',
-            'tag' => new TagResource($tag)
+            'tag' => new TagResource($tag),
         ], Response::HTTP_OK);
     }
 
@@ -63,7 +63,7 @@ class TagController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Tag eliminado correctamente.'
+            'message' => 'Tag eliminado correctamente.',
         ], Response::HTTP_OK);
     }
 }

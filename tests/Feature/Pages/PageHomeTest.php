@@ -3,17 +3,17 @@
 use App\Models\User;
 
 it('loads Home page successfully', function () {
-    //Arrange
+    // Arrange
     $response = $this->get('/');
-    //Act & Assert
+    // Act & Assert
     $response->assertStatus(200);
 
 });
 
 it('shows login and register buttons when not logged in', function () {
-    //Arrange
+    // Arrange
     $response = $this->get('/');
-    //Act & Assert
+    // Act & Assert
     $response->assertSee('login')
         ->assertSee('register')
         ->assertDontSee('profile')
@@ -21,12 +21,12 @@ it('shows login and register buttons when not logged in', function () {
 });
 
 it('shows profile and logout buttons when logged in', function () {
-    //Arrange
+    // Arrange
     $user = User::factory()->create();
     $this->actingAs($user);
-    //Act
+    // Act
     $response = $this->get('/');
-    //Assert
+    // Assert
     $response->assertSee('profile')
         ->assertSee('logout')
         ->assertDontSee('login')
@@ -34,8 +34,8 @@ it('shows profile and logout buttons when logged in', function () {
 });
 
 it('shows posts when there are posts', function () {
-    //Arrange
+    // Arrange
     $response = $this->get('/');
-    //Act & Assert
+    // Act & Assert
     $response->assertSee('Posts');
 });

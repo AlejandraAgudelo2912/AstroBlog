@@ -8,7 +8,14 @@ use Livewire\Component;
 
 class ObservationPointForm extends Component
 {
-    public $name, $description, $latitude, $longitude;
+    public $name;
+
+    public $description;
+
+    public $latitude;
+
+    public $longitude;
+
     public $showForm = false;
 
     protected $rules = [
@@ -55,6 +62,7 @@ class ObservationPointForm extends Component
         $this->reset(['name', 'description', 'latitude', 'longitude']);
         $this->showForm = false;
     }
+
     public function render()
     {
         return view('livewire.observation-point-form');

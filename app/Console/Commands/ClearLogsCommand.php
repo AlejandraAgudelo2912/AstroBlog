@@ -11,12 +11,13 @@ class ClearLogsCommand extends Command
 
     protected $description = 'Elimina todos los logs almacenados en storage/logs';
 
-        public function handle()
+    public function handle()
     {
         $logPath = storage_path('logs');
 
-        if (!File::exists($logPath)) {
+        if (! File::exists($logPath)) {
             $this->info('No hay logs para eliminar.');
+
             return;
         }
 

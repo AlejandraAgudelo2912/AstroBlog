@@ -12,9 +12,7 @@ class InactiveUserNotificationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     public function envelope(): Envelope
     {

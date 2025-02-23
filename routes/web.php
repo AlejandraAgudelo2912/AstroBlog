@@ -7,11 +7,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
-require __DIR__ . '/public.php';
-require __DIR__ . '/admin.php';
-require __DIR__ . '/user.php';
+require __DIR__.'/public.php';
+require __DIR__.'/admin.php';
+require __DIR__.'/user.php';
 
-Route::get('/',[PageHomeController::class,'index'])->name('page-home.index');
+Route::get('/', [PageHomeController::class, 'index'])->name('page-home.index');
 
 Route::get('/nasa/picture', [NasaController::class, 'showPicture'])->name('nasa.picture');
 Route::get('/nasa/asteroids', [NasaController::class, 'showAsteroids'])->name('nasa.asteroids');

@@ -19,6 +19,7 @@ class NasaController extends Controller
     public function showPicture()
     {
         $data = $this->astronomyService->getAstronomyPicture();
+
         return view('nasa.picture', compact('data'));
     }
 
@@ -28,6 +29,7 @@ class NasaController extends Controller
     public function showAsteroids()
     {
         $data = $this->astronomyService->getAsteroids();
+
         return view('nasa.asteroids', compact('data'));
     }
 }

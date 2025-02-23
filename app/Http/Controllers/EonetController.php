@@ -16,6 +16,7 @@ class EonetController extends Controller
     public function index()
     {
         $events = $this->eonetService->getEvents();
+
         return view('eonet.index', compact('events'));
     }
 

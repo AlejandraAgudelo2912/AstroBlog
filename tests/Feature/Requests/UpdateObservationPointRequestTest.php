@@ -16,7 +16,7 @@ it('passes validation with valid data', function () {
         'longitude' => -75.98765,
     ];
 
-    $request = new UpdateObservationPointRequest();
+    $request = new UpdateObservationPointRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -33,7 +33,7 @@ it('fails validation when name is missing', function () {
         'longitude' => -75.98765,
     ];
 
-    $request = new UpdateObservationPointRequest();
+    $request = new UpdateObservationPointRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -51,7 +51,7 @@ it('fails validation when latitude is missing', function () {
         'longitude' => -75.98765,
     ];
 
-    $request = new UpdateObservationPointRequest();
+    $request = new UpdateObservationPointRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -69,7 +69,7 @@ it('fails validation when longitude is missing', function () {
         'latitude' => 45.12345,
     ];
 
-    $request = new UpdateObservationPointRequest();
+    $request = new UpdateObservationPointRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -88,7 +88,7 @@ it('fails validation when latitude is not a number', function () {
         'longitude' => -75.98765,
     ];
 
-    $request = new UpdateObservationPointRequest();
+    $request = new UpdateObservationPointRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -107,7 +107,7 @@ it('fails validation when longitude is not a number', function () {
         'longitude' => 'not-a-number',
     ];
 
-    $request = new UpdateObservationPointRequest();
+    $request = new UpdateObservationPointRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());

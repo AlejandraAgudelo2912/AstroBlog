@@ -1,41 +1,40 @@
 <?php
 
-
 use App\Livewire\ObservationPointForm;
 use App\Models\User;
 
 it('renders the component successfully', function () {
-    //Arrange
+    // Arrange
 
-    //Act & Assert
+    // Act & Assert
     Livewire::test(ObservationPointForm::class)
         ->assertStatus(200);
 });
 
 it('shows the observation form when showObservationForm is called', function () {
-    //Arrange
+    // Arrange
 
-    //Act & Assert
+    // Act & Assert
     Livewire::test(ObservationPointForm::class)
         ->call('showObservationForm')
         ->assertSet('showForm', true);
 });
 
 it('hides the observation form when hideObservationForm is called', function () {
-    //Arrange
+    // Arrange
 
-    //Act & Assert
+    // Act & Assert
     Livewire::test(ObservationPointForm::class)
         ->call('hideObservationForm')
         ->assertSet('showForm', false);
 });
 
 it('sets coordinates and shows form when setCoordinates is triggered', function () {
-    //Arrange
+    // Arrange
     $latitude = 12.345;
     $longitude = -98.765;
 
-    //Act & Assert
+    // Act & Assert
     Livewire::test(ObservationPointForm::class)
         ->dispatch('setCoordinates', $latitude, $longitude)
         ->assertSet('latitude', $latitude)
@@ -45,20 +44,20 @@ it('sets coordinates and shows form when setCoordinates is triggered', function 
 });
 
 it('validates required fields before saving', function () {
-    //Arrange
+    // Arrange
 
-    //Act & Assert
+    // Act & Assert
     Livewire::test(ObservationPointForm::class)
         ->call('save')
         ->assertHasErrors(['name', 'latitude', 'longitude']);
 });
 
 it('saves a new observation point successfully', function () {
-    //Arrange
+    // Arrange
     $user = User::factory()->create();
     $this->actingAs($user);
 
-    //Act & Assert
+    // Act & Assert
     Livewire::test(ObservationPointForm::class)
         ->set('name', 'Punto de Observación')
         ->set('description', 'Descripción del punto de observación.')

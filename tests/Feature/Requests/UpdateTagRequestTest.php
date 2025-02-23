@@ -13,7 +13,7 @@ it('passes validation with valid data', function () {
         'name' => 'Updated Tag Name',
     ];
 
-    $request = new UpdateTagRequest();
+    $request = new UpdateTagRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -26,7 +26,7 @@ it('fails validation when name is missing', function () {
     // Arrange
     $data = [];
 
-    $request = new UpdateTagRequest();
+    $request = new UpdateTagRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -42,7 +42,7 @@ it('fails validation when name is not a string', function () {
         'name' => 12345,
     ];
 
-    $request = new UpdateTagRequest();
+    $request = new UpdateTagRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());

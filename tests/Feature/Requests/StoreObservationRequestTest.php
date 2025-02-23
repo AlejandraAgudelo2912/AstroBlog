@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Requests\StoreObservationPointRequest;
 use Illuminate\Support\Facades\Validator;
 
@@ -15,7 +16,7 @@ it('passes validation with valid data', function () {
         'longitude' => -75.98765,
     ];
 
-    $request = new StoreObservationPointRequest();
+    $request = new StoreObservationPointRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -32,7 +33,7 @@ it('fails validation when name is missing', function () {
         'longitude' => -75.98765,
     ];
 
-    $request = new StoreObservationPointRequest();
+    $request = new StoreObservationPointRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -50,7 +51,7 @@ it('fails validation when latitude is missing', function () {
         'longitude' => -75.98765,
     ];
 
-    $request = new StoreObservationPointRequest();
+    $request = new StoreObservationPointRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -68,7 +69,7 @@ it('fails validation when longitude is missing', function () {
         'latitude' => 45.12345,
     ];
 
-    $request = new StoreObservationPointRequest();
+    $request = new StoreObservationPointRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -87,7 +88,7 @@ it('fails validation when latitude is not a number', function () {
         'longitude' => -75.98765,
     ];
 
-    $request = new StoreObservationPointRequest();
+    $request = new StoreObservationPointRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -106,7 +107,7 @@ it('fails validation when longitude is not a number', function () {
         'longitude' => 'not-a-number',
     ];
 
-    $request = new StoreObservationPointRequest();
+    $request = new StoreObservationPointRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -115,4 +116,3 @@ it('fails validation when longitude is not a number', function () {
     expect($validator->fails())->toBeTrue();
     expect($validator->errors()->first('longitude'))->toBe('The longitude field must be a number.');
 });
-

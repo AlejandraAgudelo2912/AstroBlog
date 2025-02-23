@@ -14,6 +14,7 @@ class UserProfileController extends Controller
     public function byPosts(User $user)
     {
         $posts = $user->posts()->latest()->paginate(10);
+
         return view('user.byPosts', compact('user', 'posts'));
     }
 }

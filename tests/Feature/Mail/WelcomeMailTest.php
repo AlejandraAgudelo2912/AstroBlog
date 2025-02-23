@@ -1,18 +1,17 @@
 <?php
 
-
 use App\Mail\WelcomeMail;
 use App\Models\User;
 
 it('sends a welcome mail to new users', function () {
-    //Arrange
+    // Arrange
     Mail::fake();
-    $user = User::factory()->create(['email' => 'user' . time() . '@example.com']);
+    $user = User::factory()->create(['email' => 'user'.time().'@example.com']);
 
-    //Act
+    // Act
     Mail::to($user->email)->send(new WelcomeMail($user));
 
-    //Assert
+    // Assert
     Mail::assertSent(WelcomeMail::class, function ($mail) use ($user) {
         return $mail->hasTo($user->email) && $mail->user->id === $user->id;
     });

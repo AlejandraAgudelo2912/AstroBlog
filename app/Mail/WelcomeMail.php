@@ -12,6 +12,7 @@ use Illuminate\Queue\SerializesModels;
 class WelcomeMail extends Mailable
 {
     use Queueable, SerializesModels;
+
     public User $user;
 
     public function __construct(User $user)

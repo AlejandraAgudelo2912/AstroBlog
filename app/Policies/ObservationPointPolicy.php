@@ -15,6 +15,7 @@ class ObservationPointPolicy
         if ($user->hasRole('god')) {
             return true;
         }
+
         return null;
     }
 

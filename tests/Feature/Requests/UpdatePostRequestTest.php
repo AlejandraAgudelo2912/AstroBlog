@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Requests\UpdatePostRequest;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Validator;
 
 beforeEach(function () {
     app()->setLocale('en');
@@ -24,7 +24,7 @@ it('passes validation with valid data', function () {
         'cover_image' => UploadedFile::fake()->image('cover.jpg', 500, 500),
     ];
 
-    $request = new UpdatePostRequest();
+    $request = new UpdatePostRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -43,7 +43,7 @@ it('fails validation when title is missing', function () {
         'category_id' => 1,
     ];
 
-    $request = new UpdatePostRequest();
+    $request = new UpdatePostRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -63,7 +63,7 @@ it('fails validation when body is missing', function () {
         'category_id' => 1,
     ];
 
-    $request = new UpdatePostRequest();
+    $request = new UpdatePostRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -83,7 +83,7 @@ it('fails validation when category_id is missing', function () {
         'visibility' => 'public',
     ];
 
-    $request = new UpdatePostRequest();
+    $request = new UpdatePostRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -104,7 +104,7 @@ it('fails validation when category_id does not exist', function () {
         'category_id' => 9999, // 🔹 ID que no existe
     ];
 
-    $request = new UpdatePostRequest();
+    $request = new UpdatePostRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -126,7 +126,7 @@ it('fails validation when cover_image is not an image', function () {
         'cover_image' => UploadedFile::fake()->create('document.pdf', 500, 'application/pdf'),
     ];
 
-    $request = new UpdatePostRequest();
+    $request = new UpdatePostRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -148,7 +148,7 @@ it('fails validation when cover_image exceeds max size', function () {
         'cover_image' => UploadedFile::fake()->image('cover.jpg')->size(3000), // 🔹 3MB (excede los 2048KB)
     ];
 
-    $request = new UpdatePostRequest();
+    $request = new UpdatePostRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -173,7 +173,7 @@ it('fails validation when tags contain an invalid id', function () {
         'tags' => $tags,
     ];
 
-    $request = new UpdatePostRequest();
+    $request = new UpdatePostRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());

@@ -4,8 +4,6 @@ use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
 beforeEach(function () {
 
     $this->admin = User::factory()->create();
@@ -19,7 +17,6 @@ beforeEach(function () {
 
     $this->tag = Tag::factory()->create();
 });
-
 
 it('allows god user to do anything', function () {
     expect(Gate::forUser($this->god)->allows('viewAny', Tag::class))->toBeTrue()

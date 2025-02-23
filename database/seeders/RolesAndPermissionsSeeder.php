@@ -11,7 +11,7 @@ class RolesAndPermissionsSeeder extends Seeder
 {
     public function run(): void
     {
-        $roles = ['god','admin', 'user'];
+        $roles = ['god', 'admin', 'user'];
 
         foreach ($roles as $role) {
             Role::firstOrCreate(['name' => $role]);
@@ -34,7 +34,7 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $adminRole = Role::where('name', 'admin')->first();
         $adminRole->syncPermissions([
-            'create posts', 'edit posts', 'delete posts'
+            'create posts', 'edit posts', 'delete posts',
         ]);
 
         $userRole = Role::where('name', 'user')->first();

@@ -10,6 +10,7 @@ class AdminUserController extends Controller
     public function list()
     {
         $users = User::all();
+
         return view('admin.users.list', compact('users'));
-   }
+    }
 }

@@ -16,6 +16,7 @@ class CommentFactory extends Factory
     public function definition(): array
     {
         $title = $this->faker->sentence;
+
         return [
             'user_id' => User::class::factory(),
             'post_id' => Post::class::factory(),

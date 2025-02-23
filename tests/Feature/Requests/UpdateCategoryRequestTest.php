@@ -15,7 +15,7 @@ it('passes validation with a valid name', function () {
         'name' => 'Updated Category Name',
     ];
 
-    $request = new UpdateCategoryRequest();
+    $request = new UpdateCategoryRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -28,7 +28,7 @@ it('fails validation when name is missing', function () {
     // Arrange
     $data = [];
 
-    $request = new UpdateCategoryRequest();
+    $request = new UpdateCategoryRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -46,7 +46,7 @@ it('fails validation when name is not unique', function () {
         'name' => 'Existing Category',
     ];
 
-    $request = new UpdateCategoryRequest();
+    $request = new UpdateCategoryRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());

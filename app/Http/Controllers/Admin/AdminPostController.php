@@ -14,9 +14,11 @@ use Illuminate\Support\Str;
 class AdminPostController extends Controller
 {
     use AuthorizesRequests;
+
     public function index()
     {
         $posts = Post::latest()->paginate(10);
+
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -25,6 +27,7 @@ class AdminPostController extends Controller
         $this->authorize('create', Post::class);
         $categories = Category::all();
         $tags = Tag::all();
+
         return view('admin.posts.create', compact('categories', 'tags'));
     }
 
@@ -65,6 +68,7 @@ class AdminPostController extends Controller
         $this->authorize('update', $post);
         $categories = Category::all();
         $tags = Tag::all();
+
         return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
@@ -100,6 +104,7 @@ class AdminPostController extends Controller
     {
         $this->authorize('delete', $post);
         $post->delete();
+
         return redirect()->route('admin.posts.index')->with('success', 'Post eliminado correctamente.');
     }
 
@@ -110,6 +115,7 @@ class AdminPostController extends Controller
 
         return response()->json(['message' => 'Post restaurado correctamente.'], 200);
     }
+
     public function forceDelete($id)
     {
         $post = Post::withTrashed()->findOrFail($id);
@@ -121,12 +127,14 @@ class AdminPostController extends Controller
     public function list()
     {
         $posts = Post::all();
+
         return view('admin.posts.list', compact('posts'));
     }
 
     public function myPosts()
     {
         $posts = auth()->user()->posts;
+
         return view('admin.posts.my-posts', compact('posts'));
 
     }

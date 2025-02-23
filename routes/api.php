@@ -22,7 +22,7 @@ Route::middleware(['auth:sanctum', 'force.json'])->name('api.')->group(function 
     Route::delete('posts/{post:id}/comments/{comment:id}', [CommentController::class, 'destroy'])->name('posts.comments.destroy');
 
     Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
-    Route::post('categories',[CategoryController::class, 'store'])->name('categories.store');
+    Route::post('categories', [CategoryController::class, 'store'])->name('categories.store');
     Route::get('categories/{category:id}', [CategoryController::class, 'show'])->name('categories.show');
     Route::put('categories/{category:id}', [CategoryController::class, 'update'])->name('categories.update');
     Route::delete('categories/{category:id}', [CategoryController::class, 'destroy'])->name('categories.destroy');

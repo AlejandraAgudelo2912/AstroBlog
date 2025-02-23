@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\User;
-use App\Models\Post;
 use App\Models\Comment;
+use App\Models\Post;
+use App\Models\User;
 
 beforeEach(function () {
     $this->user = User::factory()->create();
@@ -63,7 +63,7 @@ it('renders the show page for a comment', function () {
     ]);
 
     // Act
-    $response = $this->get(route('admin.posts.comments.show', ['post' => $post, 'comment' => $comment ]));
+    $response = $this->get(route('admin.posts.comments.show', ['post' => $post, 'comment' => $comment]));
 
     // Assert
     $response->assertStatus(200);
@@ -79,7 +79,7 @@ it('renders the edit page for a comment', function () {
         'slug' => 'test-comment-slug']);
 
     // Act
-    $response = $this->get(route('admin.posts.comments.edit', ['post' => $post, 'comment' => $comment ]));
+    $response = $this->get(route('admin.posts.comments.edit', ['post' => $post, 'comment' => $comment]));
 
     // Assert
     $response->assertStatus(200);
@@ -90,7 +90,7 @@ it('renders the edit page for a comment', function () {
 it('updates a comment successfully', function () {
     // Arrange
     $post = Post::factory()->create();
-    $comment = Comment::factory()->create([ 'post_id' => $post->id]);
+    $comment = Comment::factory()->create(['post_id' => $post->id]);
     $newData = [
         'title' => 'Updated comment title.',
         'body' => 'Updated comment body.',

@@ -7,24 +7,24 @@ use App\Models\Tag;
 use App\Models\User;
 
 it('belongs to an user', function () {
-    //Arrange
+    // Arrange
     $user = User::factory()->has(Post::factory())->create();
-    $post=Post::factory()->create(['user_id'=>$user->id]);
+    $post = Post::factory()->create(['user_id' => $user->id]);
 
-    //Act
+    // Act
     $postUser = $post->user;
 
-    //Assert
+    // Assert
     $this->assertInstanceOf(User::class, $postUser);
     $this->assertEquals($user->id, $postUser->id);
 });
 
 it('has comments', function () {
-    //Arrange
+    // Arrange
     $post = Post::factory()->create();
     $post->comments()->save(Comment::factory()->make(['user_id' => User::factory()->create()->id]));
 
-    //Act & Assert
+    // Act & Assert
     $post->refresh();
     expect($post->comments)
         ->toHaveCount(1)
@@ -33,11 +33,11 @@ it('has comments', function () {
 });
 
 it('belongs to a category', function () {
-    //Arrange
+    // Arrange
     $category = Category::factory()->create();
     $post = Post::factory()->create(['category_id' => $category->id]);
 
-    //Act & Assert
+    // Act & Assert
     $post->refresh();
     expect($post->category)
         ->toBeInstanceOf(Category::class)
@@ -46,11 +46,11 @@ it('belongs to a category', function () {
 });
 
 it('belongs to many tags', function () {
-    //Arrange
+    // Arrange
     $post = Post::factory()->create();
     $post->tags()->attach(Tag::factory()->create());
 
-    //Act & Assert
+    // Act & Assert
     $post->refresh();
     expect($post->tags)
         ->toHaveCount(1)
@@ -59,11 +59,11 @@ it('belongs to many tags', function () {
 });
 
 it('returns only published and public posts', function () {
-    //Arrange
+    // Arrange
     $post = Post::factory()->create(['status' => 'published', 'visibility' => 'public']);
     $post2 = Post::factory()->create(['status' => 'draft', 'visibility' => 'public']);
 
-    //Act & Assert
+    // Act & Assert
     $posts = Post::publicados()->get();
     expect($posts)
         ->toHaveCount(1)
@@ -75,12 +75,12 @@ it('returns only published and public posts', function () {
 });
 
 it('returns the top 3 liked posts', function () {
-    //Arrange
+    // Arrange
     $post = Post::factory()->create(['status' => 'published', 'visibility' => 'public']);
     $post2 = Post::factory()->create(['status' => 'published', 'visibility' => 'public']);
     $post3 = Post::factory()->create(['status' => 'published', 'visibility' => 'public']);
 
-    //Act & Assert
+    // Act & Assert
     $posts = Post::topLiked()->get();
     expect($posts)
         ->toHaveCount(3)

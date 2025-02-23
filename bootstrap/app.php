@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Middleware\DisableRouteKeyNameMiddleware;
-use App\Http\Middleware\ForceJsonResponseMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;

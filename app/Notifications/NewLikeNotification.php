@@ -5,11 +5,11 @@ namespace App\Notifications;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Notifications\Notification;
-use Illuminate\Notifications\Messages\MailMessage;
 
 class NewLikeNotification extends Notification
 {
     protected $user;
+
     protected $post;
 
     public function __construct(User $user, Post $post)
@@ -26,7 +26,7 @@ class NewLikeNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message' => $this->user->name . ' le dio like a tu post: "' . $this->post->title . '"',
+            'message' => $this->user->name.' le dio like a tu post: "'.$this->post->title.'"',
             'post_slug' => $this->post->slug,
             'user_id' => $this->user->id,
         ];

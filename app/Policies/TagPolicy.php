@@ -15,6 +15,7 @@ class TagPolicy
         if ($user->hasRole('god')) {
             return true;
         }
+
         return null;
     }
 

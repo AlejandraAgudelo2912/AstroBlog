@@ -4,11 +4,11 @@ use App\Models\Post;
 use App\Models\User;
 
 it('has posts', function () {
-    //Arrange
+    // Arrange
     $user = User::factory()->create();
     $user->posts()->save(Post::factory()->make());
 
-    //Act & Assert
+    // Act & Assert
     $user->refresh();
     expect($user->posts)
         ->toHaveCount(1)

@@ -8,12 +8,12 @@ it('dispatches event for unverified users', function () {
     // Arrange
     $unverifiedUser = User::factory()->create([
         'email_verified_at' => null,
-        'created_at' => Carbon::now()->subDays(2)
+        'created_at' => Carbon::now()->subDays(2),
     ]);
 
     $verifiedUser = User::factory()->create([
         'email_verified_at' => now(),
-        'created_at' => Carbon::now()->subDays(2)
+        'created_at' => Carbon::now()->subDays(2),
     ]);
 
     Event::fake();
@@ -37,7 +37,7 @@ it('does not dispatch event if no unverified users', function () {
     // Arrange
     User::factory()->create([
         'email_verified_at' => now(),
-        'created_at' => Carbon::now()->subDays(2)
+        'created_at' => Carbon::now()->subDays(2),
     ]);
 
     Event::fake();

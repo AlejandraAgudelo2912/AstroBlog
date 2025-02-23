@@ -11,10 +11,10 @@ it('passes validation with valid data', function () {
     $data = [
         'title' => 'This is a comment title',
         'body' => 'This is the body of the comment.',
-        'parent_id' => null
+        'parent_id' => null,
     ];
 
-    $request = new StoreCommentRequest();
+    $request = new StoreCommentRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -27,10 +27,10 @@ it('fails validation when title is missing', function () {
     // Arrange
     $data = [
         'body' => 'This is the body of the comment.',
-        'parent_id' => null
+        'parent_id' => null,
     ];
 
-    $request = new StoreCommentRequest();
+    $request = new StoreCommentRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -44,10 +44,10 @@ it('fails validation when body is missing', function () {
     // Arrange
     $data = [
         'title' => 'This is a comment title',
-        'parent_id' => null
+        'parent_id' => null,
     ];
 
-    $request = new StoreCommentRequest();
+    $request = new StoreCommentRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -62,10 +62,10 @@ it('fails validation when parent_id is invalid', function () {
     $data = [
         'title' => 'Valid Title',
         'body' => 'Valid body',
-        'parent_id' => 9999 // 🔹 ID que no existe en la tabla comments
+        'parent_id' => 9999, // 🔹 ID que no existe en la tabla comments
     ];
 
-    $request = new StoreCommentRequest();
+    $request = new StoreCommentRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());

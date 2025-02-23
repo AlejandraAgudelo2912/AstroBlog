@@ -10,6 +10,7 @@ class PublicCategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
+
         return view('public.categories.index', compact('categories'));
     }
 

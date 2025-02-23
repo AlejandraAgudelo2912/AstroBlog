@@ -10,6 +10,7 @@ class PublicObservationPointController extends Controller
     public function index()
     {
         $points = ObservationPoint::all();
+
         return view('public.map.index', compact('points'));
     }
 }

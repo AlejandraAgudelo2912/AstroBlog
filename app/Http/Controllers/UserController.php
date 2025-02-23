@@ -11,6 +11,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
+
         return view('god.users.index', compact('users'));
     }
 
@@ -22,6 +23,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $roles = Role::all();
+
         return view('god.users.edit', compact('user', 'roles'));
     }
 
@@ -29,8 +31,8 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'roles' => 'array'
+            'email' => 'required|email|unique:users,email,'.$user->id,
+            'roles' => 'array',
         ]);
 
         $user->update($request->only(['name', 'email']));
@@ -49,6 +51,7 @@ class UserController extends Controller
         }
 
         $user->delete();
+
         return redirect()->route('users.index')->with('success', 'Usuario eliminado correctamente');
     }
 }

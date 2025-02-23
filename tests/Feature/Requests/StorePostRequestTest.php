@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Requests\StorePostRequest;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Validator;
 
 beforeEach(function () {
     app()->setLocale('en');
@@ -22,7 +22,7 @@ it('passes validation with valid data', function () {
         'tags' => $tags->pluck('id')->toArray(),
     ];
 
-    $request = new StorePostRequest();
+    $request = new StorePostRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -39,7 +39,7 @@ it('fails validation when title is missing', function () {
         'category_id' => 1,
     ];
 
-    $request = new StorePostRequest();
+    $request = new StorePostRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -57,7 +57,7 @@ it('fails validation when body is missing', function () {
         'category_id' => 1,
     ];
 
-    $request = new StorePostRequest();
+    $request = new StorePostRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -75,7 +75,7 @@ it('fails validation when category_id is missing', function () {
         'published_at' => now()->toDateTimeString(),
     ];
 
-    $request = new StorePostRequest();
+    $request = new StorePostRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -94,7 +94,7 @@ it('fails validation when category_id does not exist', function () {
         'category_id' => 9999, // 🔹 ID que no existe
     ];
 
-    $request = new StorePostRequest();
+    $request = new StorePostRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -114,7 +114,7 @@ it('fails validation when cover_image is not an image', function () {
         'cover_image' => UploadedFile::fake()->create('document.pdf', 500, 'application/pdf'),
     ];
 
-    $request = new StorePostRequest();
+    $request = new StorePostRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -134,7 +134,7 @@ it('fails validation when cover_image exceeds max size', function () {
         'cover_image' => UploadedFile::fake()->image('cover.jpg')->size(2000), // 2MB
     ];
 
-    $request = new StorePostRequest();
+    $request = new StorePostRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -157,7 +157,7 @@ it('fails validation when tags contain an invalid id', function () {
         'tags' => $tags,
     ];
 
-    $request = new StorePostRequest();
+    $request = new StorePostRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());

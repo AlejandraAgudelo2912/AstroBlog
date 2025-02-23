@@ -21,8 +21,9 @@ class GenerateTokensCommand extends Command
             $query->where('name', 'user');
         })->first();
 
-        if (!$admin || !$user) {
+        if (! $admin || ! $user) {
             $this->error('No se encontraron usuarios con los roles especificados.');
+
             return;
         }
 

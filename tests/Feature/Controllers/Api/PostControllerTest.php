@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\User;
-use App\Models\Post;
 use App\Models\Category;
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Response;
 
 beforeEach(function () {
@@ -21,7 +21,7 @@ it('returns all published posts', function () {
     // Assert
     $response->assertStatus(Response::HTTP_OK)
         ->assertJsonStructure([
-            '*' => ['id', 'title', 'slug', 'body', 'published_at', 'visibility']
+            '*' => ['id', 'title', 'slug', 'body', 'published_at', 'visibility'],
         ]);
 });
 
@@ -40,7 +40,7 @@ it('returns a specific post', function () {
                 'title' => $post->title,
                 'slug' => $post->slug,
                 'body' => $post->body,
-            ]
+            ],
         ]);
 });
 
@@ -54,7 +54,7 @@ it('creates a new post', function () {
         'published_at' => now()->toDateString(),
         'visibility' => 'public',
         'category_id' => $category->id,
-        'user_id' => $this->user->id
+        'user_id' => $this->user->id,
     ];
 
     // Act
@@ -70,7 +70,6 @@ it('creates a new post', function () {
 it('updates an existing post', function () {
     // Arrange
 
-
     $post = Post::factory()->create(['user_id' => $this->user->id]);
 
     $data = ['title' => 'Updated Post Title', 'body' => 'Updated body content'];
@@ -82,7 +81,7 @@ it('updates an existing post', function () {
     $response->assertStatus(Response::HTTP_OK)
         ->assertJson([
             'message' => 'Post actualizado con éxito',
-            'post' => ['title' => 'Updated Post Title']
+            'post' => ['title' => 'Updated Post Title'],
         ]);
 
     $this->assertDatabaseHas('posts', ['id' => $post->id, 'title' => 'Updated Post Title']);
@@ -101,9 +100,8 @@ it('deletes a post', function () {
     // Assert
     $response->assertStatus(Response::HTTP_OK)
         ->assertJson([
-            'message' => 'Post eliminado'
+            'message' => 'Post eliminado',
         ]);
 
     $this->assertDatabaseMissing('posts', ['id' => $post->id]);
 })->skip('skip');
-

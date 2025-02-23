@@ -14,6 +14,7 @@ class SendNotificationJob implements ShouldQueue
     use Dispatchable, Queueable, SerializesModels;
 
     protected $user;
+
     protected $comment;
 
     public function __construct(User $user, $comment)
@@ -21,6 +22,7 @@ class SendNotificationJob implements ShouldQueue
         $this->user = $user;
         $this->comment = $comment;
     }
+
     public function handle()
     {
         $this->user->notify(new NewCommentNotification($this->comment));

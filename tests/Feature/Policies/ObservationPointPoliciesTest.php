@@ -51,4 +51,3 @@ it('allows only admins to force delete observation points', function () {
     expect(Gate::forUser($this->admin)->allows('forceDelete', $this->observationPoint))->toBeTrue()
         ->and(Gate::forUser($this->user)->allows('forceDelete', $this->observationPoint))->toBeFalse();
 });
-

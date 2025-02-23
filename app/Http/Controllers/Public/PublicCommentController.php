@@ -11,6 +11,7 @@ class PublicCommentController extends Controller
     public function index(Post $post)
     {
         $comments = $post->comments()->latest()->paginate(10);
+
         return view('public.comments.index', compact('post', 'comments'));
     }
 

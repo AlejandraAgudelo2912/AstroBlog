@@ -12,6 +12,7 @@ class AdminObserverPointController extends Controller
     public function index()
     {
         $points = ObservationPoint::all();
+
         return view('admin.map.index', compact('points'));
     }
 
@@ -23,20 +24,20 @@ class AdminObserverPointController extends Controller
 
         return redirect()->route('admin.observers.index')->with('success', 'Punto de observación agregado.');
     }
-//
-//    public function update(UpdateObservationPointRequest $request, ObservationPointForm $observationPoint)
-//    {
-//        $request->validated();
-//
-//        $observationPoint->update($request->all());
-//
-//        return redirect()->route('admin.observers.index')->with('success', 'Punto de observación actualizado.');
-//    }
-//
-//    public function destroy(ObservationPointForm $observationPoint)
-//    {
-//        $observationPoint->delete();
-//
-//        return redirect()->route('admin.observers.index')->with('success', 'Punto de observación eliminado.');
-//    }
+    //
+    //    public function update(UpdateObservationPointRequest $request, ObservationPointForm $observationPoint)
+    //    {
+    //        $request->validated();
+    //
+    //        $observationPoint->update($request->all());
+    //
+    //        return redirect()->route('admin.observers.index')->with('success', 'Punto de observación actualizado.');
+    //    }
+    //
+    //    public function destroy(ObservationPointForm $observationPoint)
+    //    {
+    //        $observationPoint->delete();
+    //
+    //        return redirect()->route('admin.observers.index')->with('success', 'Punto de observación eliminado.');
+    //    }
 }

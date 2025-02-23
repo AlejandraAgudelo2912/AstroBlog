@@ -16,11 +16,12 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     use HasApiTokens;
-    use HasRoles;
-
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
+
     use HasProfilePhoto;
+
+    use HasRoles;
     use Notifiable;
     use TwoFactorAuthenticatable;
 
@@ -71,9 +72,9 @@ class User extends Authenticatable
         ];
     }
 
-    public function posts() : HasMany
+    public function posts(): HasMany
     {
-        return $this->hasMany(Post::class, 'user_id','id');
+        return $this->hasMany(Post::class, 'user_id', 'id');
     }
 
     public function liked_posts()
@@ -90,5 +91,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
-
 }

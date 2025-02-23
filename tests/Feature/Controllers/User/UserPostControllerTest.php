@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\User;
-use App\Models\Post;
 use App\Models\Category;
+use App\Models\Post;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Http\UploadedFile;
 
 beforeEach(function () {
@@ -61,7 +61,7 @@ it('stores a new post successfully', function () {
 
 it('renders the show page for a post', function () {
     // Arrange
-    $post = Post::factory()->create(['status' => 'published','visibility' => 'public']);
+    $post = Post::factory()->create(['status' => 'published', 'visibility' => 'public']);
 
     // Act
     $response = $this->get(route('user.posts.show', $post));

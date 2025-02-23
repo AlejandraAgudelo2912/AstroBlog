@@ -7,7 +7,6 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class CategoryController extends Controller
@@ -22,7 +21,6 @@ class CategoryController extends Controller
         return new CategoryResource($category);
     }
 
-
     public function store(StoreCategoryRequest $request)
     {
         $request->validated();
@@ -32,13 +30,13 @@ class CategoryController extends Controller
         $category = Category::create([
             'name' => $request->name,
             'slug' => $slug,
-            'description' => $request->description
+            'description' => $request->description,
         ]);
 
         return response()->json([
             'success' => true,
             'message' => 'Categoría creada correctamente.',
-            'category' => new CategoryResource($category)
+            'category' => new CategoryResource($category),
         ], Response::HTTP_CREATED);
     }
 
@@ -47,13 +45,13 @@ class CategoryController extends Controller
         $request->validated();
 
         $category->update([
-            'name' => $request->name
+            'name' => $request->name,
         ]);
 
         return response()->json([
             'success' => true,
             'message' => 'Categoría actualizada correctamente.',
-            'category' => new CategoryResource($category)
+            'category' => new CategoryResource($category),
         ], Response::HTTP_OK);
     }
 
@@ -63,7 +61,7 @@ class CategoryController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Categoría eliminada correctamente.'
+            'message' => 'Categoría eliminada correctamente.',
         ], Response::HTTP_OK);
     }
 }

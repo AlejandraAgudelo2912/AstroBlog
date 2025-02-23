@@ -23,7 +23,8 @@ class DatabaseBackupCommand extends Command
         }
 
         if (empty($tables)) {
-            $this->warn("No se encontraron tablas en la base de datos.");
+            $this->warn('No se encontraron tablas en la base de datos.');
+
             return;
         }
 
@@ -35,7 +36,7 @@ class DatabaseBackupCommand extends Command
             $backupData[$tableName] = DB::table($tableName)->get();
         }
 
-        $backupPath = 'backups/db_backup_' . now()->format('Y-m-d_H-i-s') . '.json';
+        $backupPath = 'backups/db_backup_'.now()->format('Y-m-d_H-i-s').'.json';
 
         Storage::disk('local')->put($backupPath, json_encode($backupData, JSON_PRETTY_PRINT));
 

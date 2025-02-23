@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\User;
 use App\Models\ObservationPoint;
+use App\Models\User;
 use Illuminate\Http\Response;
 
 it('returns all observation points', function () {
@@ -18,8 +18,8 @@ it('returns all observation points', function () {
     $response->assertStatus(Response::HTTP_OK)
         ->assertJsonStructure([
             'data' => [
-                '*' => ['id', 'name', 'description', 'latitude', 'longitude', 'user_id', 'created_at']
-            ]
+                '*' => ['id', 'name', 'description', 'latitude', 'longitude', 'user_id', 'created_at'],
+            ],
         ]);
 });
 
@@ -42,8 +42,8 @@ it('returns a specific observation point', function () {
                 'description' => $point->description,
                 'latitude' => $point->latitude,
                 'longitude' => $point->longitude,
-                'user_id' => $point->user_id
-            ]
+                'user_id' => $point->user_id,
+            ],
         ]);
 });
 
@@ -70,7 +70,7 @@ it('creates a new observation point', function () {
             'observation_point' => [
                 'name' => 'New Observation Point',
                 'description' => 'A beautiful place for stargazing',
-            ]
+            ],
         ]);
 
     $this->assertDatabaseHas('observation_points', ['name' => 'New Observation Point']);
@@ -101,7 +101,7 @@ it('updates an observation point', function () {
             'observation_point' => [
                 'name' => 'Updated Observation Point',
                 'description' => 'Now even better for stargazing',
-            ]
+            ],
         ]);
 
     $this->assertDatabaseHas('observation_points', ['name' => 'Updated Observation Point']);
@@ -121,9 +121,8 @@ it('deletes an observation point', function () {
     $response->assertStatus(Response::HTTP_OK)
         ->assertJson([
             'success' => true,
-            'message' => 'Punto de observación eliminado correctamente.'
+            'message' => 'Punto de observación eliminado correctamente.',
         ]);
 
     $this->assertDatabaseMissing('observation_points', ['id' => $point->id]);
 });
-

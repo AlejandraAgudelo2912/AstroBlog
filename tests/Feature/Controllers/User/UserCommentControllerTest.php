@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\User;
-use App\Models\Post;
 use App\Models\Comment;
+use App\Models\Post;
+use App\Models\User;
 
 beforeEach(function () {
     $this->user = User::factory()->create();
@@ -15,7 +15,7 @@ it('renders the index page showing user comments on a post', function () {
     $post = Post::factory()->create();
     Comment::factory()->count(3)->create([
         'post_id' => $post->id,
-        'user_id' => $this->user->id
+        'user_id' => $this->user->id,
     ]);
 
     // Act
@@ -33,7 +33,7 @@ it('renders the show page for a comment', function () {
     $comment = Comment::factory()->create(['user_id' => $this->user->id, 'post_id' => $post->id]);
 
     // Act
-    $response = $this->get(route('user.posts.comments.show', ['post' => $post,'comment' => $comment]));
+    $response = $this->get(route('user.posts.comments.show', ['post' => $post, 'comment' => $comment]));
 
     // Assert
     $response->assertStatus(200);
@@ -77,7 +77,7 @@ it('renders the edit page for a comment', function () {
     $comment = Comment::factory()->create(['user_id' => $this->user->id, 'post_id' => $post->id]);
 
     // Act
-    $response = $this->get(route('user.posts.comments.edit', [ 'post' => $post,'comment' => $comment]));
+    $response = $this->get(route('user.posts.comments.edit', ['post' => $post, 'comment' => $comment]));
 
     // Assert
     $response->assertStatus(200);
@@ -96,10 +96,10 @@ it('updates a comment successfully', function () {
     ];
 
     // Act
-    $response = $this->put(route('user.posts.comments.update', [ 'post' => $post,'comment' => $comment]), $newData);
+    $response = $this->put(route('user.posts.comments.update', ['post' => $post, 'comment' => $comment]), $newData);
 
     // Assert
-    $response->assertRedirect(route('user.posts.comments.index',['post' => $post]));
+    $response->assertRedirect(route('user.posts.comments.index', ['post' => $post]));
     $this->assertDatabaseHas('comments', ['body' => 'Updated comment content']);
 });
 
@@ -109,10 +109,10 @@ it('deletes a comment successfully', function () {
     $comment = Comment::factory()->create(['user_id' => $this->user->id, 'post_id' => $post->id]);
 
     // Act
-    $response = $this->delete(route('user.posts.comments.destroy',['post' => $post,'comment' => $comment]));
+    $response = $this->delete(route('user.posts.comments.destroy', ['post' => $post, 'comment' => $comment]));
 
     // Assert
-    $response->assertRedirect(route('user.posts.comments.index',['post' => $post]));
+    $response->assertRedirect(route('user.posts.comments.index', ['post' => $post]));
     $this->assertDatabaseMissing('comments', ['id' => $comment->id]);
 })->skip('skip');
 

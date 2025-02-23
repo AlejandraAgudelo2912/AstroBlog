@@ -1,16 +1,15 @@
 <?php
 
-
 use App\Models\Post;
 use App\Models\Tag;
 
 it('belongs to many posts', function () {
-    //Arrange
+    // Arrange
     $tag = Tag::factory()->create();
     $post = Post::factory()->create();
     $post->tags()->attach($tag);
 
-    //Act & Assert
+    // Act & Assert
     $tag->refresh();
     expect($tag->posts)
         ->toHaveCount(1)

@@ -14,17 +14,20 @@ use Illuminate\Support\Str;
 class UserPostController extends Controller
 {
     use AuthorizesRequests;
+
     public function index()
     {
         $posts = Post::publicados()->get();
+
         return view('user.posts.index', compact('posts'));
     }
 
     public function create()
     {
-        //$this->authorize('create', Post::class);
+        // $this->authorize('create', Post::class);
         $categories = Category::all();
         $tags = Tag::all();
+
         return view('user.posts.create', compact('categories', 'tags'));
     }
 
@@ -58,6 +61,7 @@ class UserPostController extends Controller
     public function show(Post $post)
     {
         $this->authorize('view', $post);
+
         return view('user.posts.show', compact('post'));
     }
 
@@ -66,6 +70,7 @@ class UserPostController extends Controller
         $this->authorize('update', $post);
         $categories = Category::all();
         $tags = Tag::all();
+
         return view('user.posts.edit', compact('post', 'categories', 'tags'));
     }
 
@@ -102,12 +107,14 @@ class UserPostController extends Controller
     {
         $this->authorize('delete', $post);
         $post->delete();
+
         return redirect()->route('user.posts.index')->with('success', 'Post eliminado correctamente.');
     }
 
     public function myPosts()
     {
         $posts = Post::where('user_id', auth()->id())->latest()->paginate(10);
+
         return view('user.posts.index', compact('posts'));
     }
 }

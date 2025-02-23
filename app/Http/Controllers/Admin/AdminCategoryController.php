@@ -11,22 +11,26 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class AdminCategoryController extends Controller
 {
     use AuthorizesRequests;
+
     public function index()
     {
         $this->authorize('viewAny', Category::class);
         $categories = Category::latest()->paginate(10);
+
         return view('admin.categories.index', compact('categories'));
     }
 
     public function show(Category $category)
     {
         $this->authorize('view', $category);
+
         return view('admin.categories.show', compact('category'));
     }
 
     public function create()
     {
         $this->authorize('create', Category::class);
+
         return view('admin.categories.create');
     }
 
@@ -42,6 +46,7 @@ class AdminCategoryController extends Controller
     public function edit(Category $category)
     {
         $this->authorize('update', $category);
+
         return view('admin.categories.edit', compact('category'));
     }
 

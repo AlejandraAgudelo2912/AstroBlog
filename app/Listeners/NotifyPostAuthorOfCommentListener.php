@@ -7,9 +7,7 @@ use App\Jobs\SendNotificationJob;
 
 class NotifyPostAuthorOfCommentListener
 {
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     public function handle(NewCommentAddedEvent $event): void
     {

@@ -17,6 +17,7 @@ class AdminPanel extends Component
     {
         $this->showModal = false;
     }
+
     public function render()
     {
         return view('livewire.admin-panel');

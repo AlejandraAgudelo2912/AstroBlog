@@ -8,6 +8,7 @@ use Livewire\Component;
 class NotificationsList extends Component
 {
     public $notifications;
+
     public $showDropdown = false;
 
     protected $listeners = ['refreshNotifications' => 'loadNotifications'];
@@ -40,8 +41,9 @@ class NotificationsList extends Component
 
     public function toggleDropdown()
     {
-        $this->showDropdown = !$this->showDropdown;
+        $this->showDropdown = ! $this->showDropdown;
     }
+
     public function render()
     {
         return view('livewire.notifications-list');

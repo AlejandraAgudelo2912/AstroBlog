@@ -13,26 +13,30 @@ use Illuminate\Support\Str;
 class AdminCommentController extends Controller
 {
     use AuthorizesRequests;
+
     public function index(Post $post)
     {
         $this->authorize('viewAny', Comment::class);
         $comments = Comment::latest()->paginate(10);
+
         return view('admin.comments.index', compact('comments', 'post'));
     }
 
     public function show(Post $post, Comment $comment)
     {
         $this->authorize('view', $comment);
+
         return view('admin.comments.show', compact('comment', 'post'));
     }
 
     public function edit(Post $post, Comment $comment)
     {
         $this->authorize('update', $comment);
+
         return view('admin.comments.edit', compact('comment', 'post'));
     }
 
-    public function update(Post $post,UpdateCommentRequest $request, Comment $comment)
+    public function update(Post $post, UpdateCommentRequest $request, Comment $comment)
     {
         $request->validated();
 
@@ -48,6 +52,7 @@ class AdminCommentController extends Controller
     {
         $this->authorize('delete', $comment);
         $comment->delete();
+
         return redirect()->route('admin.posts.comments.index', ['post' => $post])->with('success', 'Comentario eliminado correctamente.');
     }
 
@@ -69,10 +74,10 @@ class AdminCommentController extends Controller
         return redirect()->route('posts.show', $post)->with('success', 'Comment created successfully');
     }
 
-    public function create(Post $post, Comment $parent_id = null)
+    public function create(Post $post, ?Comment $parent_id = null)
     {
         $this->authorize('create', Comment::class);
+
         return view('admin.comments.create', compact('post', 'parent_id'));
     }
-
 }

@@ -14,9 +14,11 @@ use Illuminate\Support\Str;
 class UserCommentController extends Controller
 {
     use AuthorizesRequests;
+
     public function index(Post $post)
     {
         $comments = auth()->user()->comments()->get();
+
         return view('user.posts.show', compact('comments', 'post'));
     }
 
@@ -30,6 +32,7 @@ class UserCommentController extends Controller
     public function create(Post $post)
     {
         $this->authorize('create', Comment::class);
+
         return view('user.comments.create', compact('post'));
     }
 

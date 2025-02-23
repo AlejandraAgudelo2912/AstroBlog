@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Requests\UpdateCommentRequest;
 use Illuminate\Support\Facades\Validator;
 
@@ -13,7 +14,7 @@ it('passes validation with valid data', function () {
         'body' => 'This is an updated comment body.',
     ];
 
-    $request = new UpdateCommentRequest();
+    $request = new UpdateCommentRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -28,7 +29,7 @@ it('fails validation when title is missing', function () {
         'body' => 'This is an updated comment body.',
     ];
 
-    $request = new UpdateCommentRequest();
+    $request = new UpdateCommentRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -44,7 +45,7 @@ it('fails validation when body is missing', function () {
         'title' => 'Updated Comment Title',
     ];
 
-    $request = new UpdateCommentRequest();
+    $request = new UpdateCommentRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());

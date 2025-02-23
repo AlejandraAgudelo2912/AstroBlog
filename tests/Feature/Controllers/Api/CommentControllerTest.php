@@ -26,7 +26,7 @@ it('returns a specific comment', function () {
                 'body' => $comment->body,
                 'post_id' => $post->id,
                 'user_id' => $comment->user_id,
-            ]
+            ],
         ]);
 });
 
@@ -39,7 +39,7 @@ it('creates a new comment', function () {
     $data = [
         'title' => 'New Comment',
         'body' => 'This is a test comment',
-        'post_id' => $post->id
+        'post_id' => $post->id,
     ];
 
     // Act
@@ -52,8 +52,8 @@ it('creates a new comment', function () {
             'message' => 'Comentario creado correctamente.',
             'comment' => [
                 'title' => 'New Comment',
-                'body' => 'This is a test comment'
-            ]
+                'body' => 'This is a test comment',
+            ],
         ]);
 
     $this->assertDatabaseHas('comments', ['title' => 'New Comment']);
@@ -77,7 +77,7 @@ it('updates an existing comment', function () {
         ->assertJson([
             'success' => true,
             'message' => 'Comentario actualizado correctamente.',
-            'comment' => ['title' => 'Updated Comment Title']
+            'comment' => ['title' => 'Updated Comment Title'],
         ]);
 
     $this->assertDatabaseHas('comments', ['id' => $comment->id, 'title' => 'Updated Comment Title']);
@@ -98,7 +98,7 @@ it('deletes a comment', function () {
     $response->assertStatus(Response::HTTP_OK)
         ->assertJson([
             'success' => true,
-            'message' => 'Comentario eliminado correctamente.'
+            'message' => 'Comentario eliminado correctamente.',
         ]);
 
     $this->assertDatabaseMissing('comments', ['id' => $comment->id]);

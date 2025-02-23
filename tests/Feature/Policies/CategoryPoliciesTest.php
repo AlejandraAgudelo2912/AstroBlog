@@ -2,10 +2,8 @@
 
 use App\Models\Category;
 use App\Models\User;
-use Illuminate\Support\Facades\Gate;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Gate;
 
 uses(RefreshDatabase::class);
 
@@ -56,4 +54,3 @@ it('allows only admins to force delete categories', function () {
     expect(Gate::forUser($this->admin)->allows('forceDelete', $this->category))->toBeTrue()
         ->and(Gate::forUser($this->user)->allows('forceDelete', $this->category))->toBeFalse();
 });
-

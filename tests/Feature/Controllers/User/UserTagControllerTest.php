@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\User;
-use App\Models\Tag;
 use App\Models\Post;
+use App\Models\Tag;
+use App\Models\User;
 
 beforeEach(function () {
     $this->user = User::factory()->create();

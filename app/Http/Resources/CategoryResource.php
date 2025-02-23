@@ -19,7 +19,7 @@ class CategoryResource extends JsonResource
             'created_at' => $this->created_at->toDateTimeString(),
             'updated_at' => $this->updated_at->toDateTimeString(),
 
-            'posts' => PostResource::collection($this->whenLoaded('posts'))
+            'posts' => PostResource::collection($this->whenLoaded('posts')),
         ];
     }
 }

@@ -13,7 +13,7 @@ it('passes validation with valid data', function () {
         'name' => 'Valid Tag Name',
     ];
 
-    $request = new StoreTagRequest();
+    $request = new StoreTagRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -26,7 +26,7 @@ it('fails validation when name is missing', function () {
     // Arrange
     $data = [];
 
-    $request = new StoreTagRequest();
+    $request = new StoreTagRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -42,7 +42,7 @@ it('fails validation when name exceeds max length', function () {
         'name' => str_repeat('A', 256),
     ];
 
-    $request = new StoreTagRequest();
+    $request = new StoreTagRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());
@@ -58,7 +58,7 @@ it('fails validation when name is not a string', function () {
         'name' => 12345,
     ];
 
-    $request = new StoreTagRequest();
+    $request = new StoreTagRequest;
 
     // Act
     $validator = Validator::make($data, $request->rules());

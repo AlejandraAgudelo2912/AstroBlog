@@ -14,7 +14,7 @@ class PdfController extends Controller
 
         $pdf = Pdf::loadView('pdfs.post', compact('post'));
 
-        return $pdf->download('post_' . $post->id . '.pdf');
+        return $pdf->download('post_'.$post->id.'.pdf');
     }
 
     public function generateUsersReport()

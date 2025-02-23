@@ -9,7 +9,9 @@ use Livewire\Component;
 class LikeButton extends Component
 {
     public Post $post;
+
     public bool $liked;
+
     public int $likes;
 
     public function mount(Post $post)
@@ -21,7 +23,7 @@ class LikeButton extends Component
 
     public function toggleLike()
     {
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             return redirect()->route('login');
         }
         if ($this->liked) {

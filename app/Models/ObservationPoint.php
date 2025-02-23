@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ObservationPoint extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id','name', 'description', 'latitude', 'longitude'];
+
+    protected $fillable = ['user_id', 'name', 'description', 'latitude', 'longitude'];
 
     public function user()
     {

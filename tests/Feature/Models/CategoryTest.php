@@ -1,19 +1,18 @@
 <?php
 
-
 use App\Models\Category;
 use App\Models\Post;
 
 it('has many posts', function () {
-    //Arrange
+    // Arrange
     $category = Category::factory()->create();
 
-    //Act
+    // Act
     Post::factory()->create([
-        'category_id' => $category->id
+        'category_id' => $category->id,
     ]);
 
-    //Assert
+    // Assert
     $category->refresh();
     expect($category->posts)
         ->toHaveCount(1)

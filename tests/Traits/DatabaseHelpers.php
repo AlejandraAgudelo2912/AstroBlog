@@ -28,7 +28,7 @@ trait DatabaseHelpers
         }
     }
 
-    function getTablesQuery()
+    public function getTablesQuery()
     {
         return config('database.default') === 'sqlite' ?
             "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'"

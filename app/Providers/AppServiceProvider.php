@@ -11,7 +11,6 @@ use App\Observers\CommentObserver;
 use App\Observers\UserObserver;
 use App\Policies\PostPolicy;
 use App\View\Components\BlogLayout;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;

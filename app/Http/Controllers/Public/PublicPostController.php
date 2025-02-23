@@ -10,6 +10,7 @@ class PublicPostController extends Controller
     public function index()
     {
         $posts = Post::publicados()->latest()->paginate(10);
+
         return view('public.posts.index', compact('posts'));
     }
 

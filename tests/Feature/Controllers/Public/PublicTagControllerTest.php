@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Tag;
 use App\Models\Post;
+use App\Models\Tag;
 
 it('renders the index page with tags', function () {
     // Arrange

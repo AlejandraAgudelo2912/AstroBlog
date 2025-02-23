@@ -15,6 +15,7 @@ class CategoryPolicy
         if ($user->hasRole('god')) {
             return true;
         }
+
         return null;
     }
 

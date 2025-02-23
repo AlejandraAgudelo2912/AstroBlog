@@ -2,18 +2,11 @@
 
 namespace App\Providers;
 
-use App\Models\Post;
-use App\Policies\PostPolicy;
 use Illuminate\Support\ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
-    public function register(): void
-    {
+    public function register(): void {}
 
-    }
-
-    public function boot(): void
-    {
-    }
+    public function boot(): void {}
 }

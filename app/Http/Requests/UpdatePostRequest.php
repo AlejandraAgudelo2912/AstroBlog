@@ -9,15 +9,15 @@ class UpdatePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-                'title' => 'required',
-                'body' => 'required',
-                'published_at' => 'required',
-                'status' => 'required',
-                'visibility' => 'required',
-                'category_id' => 'required | exists:categories,id',
-                'tags' => 'nullable|array',
-                'tags.*' => 'exists:tags,id',
-                'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'title' => 'required',
+            'body' => 'required',
+            'published_at' => 'required',
+            'status' => 'required',
+            'visibility' => 'required',
+            'category_id' => 'required | exists:categories,id',
+            'tags' => 'nullable|array',
+            'tags.*' => 'exists:tags,id',
+            'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 

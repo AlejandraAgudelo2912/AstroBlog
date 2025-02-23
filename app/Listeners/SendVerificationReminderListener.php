@@ -10,13 +10,12 @@ use Illuminate\Support\Facades\Mail;
 class SendVerificationReminderListener
 {
     use InteractsWithQueue;
-    public function __construct()
-    {
-    }
+
+    public function __construct() {}
 
     public function handle(UserUnverifiedFor24HoursEvent $event): void
     {
-        if (!$event->user->hasVerifiedEmail()) {
+        if (! $event->user->hasVerifiedEmail()) {
             Mail::to($event->user->email)->send(new VerificationReminderMail($event->user));
         }
     }

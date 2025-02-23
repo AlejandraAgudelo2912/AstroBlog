@@ -25,7 +25,7 @@ class RoleController extends Controller
 
         $user = User::findOrFail($request->user_id);
 
-        if ($request->role === 'god' && !auth()->user()->hasRole('god')) {
+        if ($request->role === 'god' && ! auth()->user()->hasRole('god')) {
             return redirect()->back()->with('error', 'No puedes asignar el rol "God".');
         }
 

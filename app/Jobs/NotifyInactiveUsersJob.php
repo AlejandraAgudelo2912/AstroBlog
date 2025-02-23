@@ -14,9 +14,7 @@ class NotifyInactiveUsersJob
 {
     use Dispatchable, InteractsWithQueue, SerializesModels;
 
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     public function handle(): void
     {

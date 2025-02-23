@@ -18,13 +18,13 @@ it('deletes all log files successfully', function () {
     // Arrange: Crea archivos de logs temporales en storage/logs
     $logPath = storage_path('logs');
 
-    if (!File::exists($logPath)) {
+    if (! File::exists($logPath)) {
         File::makeDirectory($logPath, 0755, true);
     }
 
     $logFiles = [
-        $logPath . '/laravel.log',
-        $logPath . '/error.log',
+        $logPath.'/laravel.log',
+        $logPath.'/error.log',
     ];
 
     foreach ($logFiles as $file) {

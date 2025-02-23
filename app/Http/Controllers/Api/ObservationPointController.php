@@ -7,7 +7,6 @@ use App\Http\Requests\StoreObservationPointRequest;
 use App\Http\Requests\UpdateObservationPointRequest;
 use App\Http\Resources\ObservationPointResource;
 use App\Models\ObservationPoint;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,10 +39,9 @@ class ObservationPointController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Punto de observación creado correctamente.',
-            'observation_point' => new ObservationPointResource($observationPoint)
+            'observation_point' => new ObservationPointResource($observationPoint),
         ], Response::HTTP_CREATED);
     }
-
 
     public function update(UpdateObservationPointRequest $request, ObservationPoint $observationPoint)
     {
@@ -54,14 +52,14 @@ class ObservationPointController extends Controller
                 'name' => $request->name,
                 'description' => $request->description,
                 'latitude' => $request->latitude,
-                'longitude' => $request->longitude
+                'longitude' => $request->longitude,
             ]
         );
 
         return response()->json([
             'success' => true,
             'message' => 'Punto de observación actualizado correctamente.',
-            'observation_point' => new ObservationPointResource($observationPoint)
+            'observation_point' => new ObservationPointResource($observationPoint),
         ], Response::HTTP_OK);
     }
 
@@ -71,7 +69,7 @@ class ObservationPointController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Punto de observación eliminado correctamente.'
+            'message' => 'Punto de observación eliminado correctamente.',
         ], Response::HTTP_OK);
     }
 }

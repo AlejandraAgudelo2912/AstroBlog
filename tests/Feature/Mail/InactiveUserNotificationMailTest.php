@@ -4,14 +4,14 @@ use App\Mail\InactiveUserNotificationMail;
 use App\Models\User;
 
 it('sends an inactive user notification email', function () {
-    //Arrange
+    // Arrange
     Mail::fake();
-    $user = User::factory()->create(['email' => 'user' . time() . '@example.com']);
+    $user = User::factory()->create(['email' => 'user'.time().'@example.com']);
 
-    //Act
-    Mail::to($user->email)->send(new InactiveUserNotificationMail());
+    // Act
+    Mail::to($user->email)->send(new InactiveUserNotificationMail);
 
-    //Assert
+    // Assert
     Mail::assertSent(InactiveUserNotificationMail::class, function ($mail) use ($user) {
         return $mail->hasTo($user->email);
     });

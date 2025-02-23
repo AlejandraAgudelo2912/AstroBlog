@@ -17,9 +17,9 @@ class CommentController extends Controller
     {
         $post = Post::where('id', $post_id)->first();
 
-        if (!$post) {
+        if (! $post) {
             return response()->json([
-                'message' => 'El post especificado no existe en la base de datos.'
+                'message' => 'El post especificado no existe en la base de datos.',
             ], Response::HTTP_NOT_FOUND);
         }
 
@@ -28,7 +28,7 @@ class CommentController extends Controller
         return CommentResource::collection($post->comments);
     }
 
-    public function show($post,$id)
+    public function show($post, $id)
     {
         $comment = Comment::where('post_id', $post)
             ->where('id', $id)
@@ -39,17 +39,17 @@ class CommentController extends Controller
 
     public function store(StoreCommentRequest $request)
     {
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             return response()->json([
                 'success' => false,
-                'message' => 'No estás autenticado.'
+                'message' => 'No estás autenticado.',
             ], Response::HTTP_UNAUTHORIZED);
         }
 
         $postExists = Post::where('id', $request->post)->exists();
-        if (!$postExists) {
+        if (! $postExists) {
             return response()->json([
-                'message' => 'El post especificado no existe.'
+                'message' => 'El post especificado no existe.',
             ], Response::HTTP_NOT_FOUND);
         }
 
@@ -59,7 +59,7 @@ class CommentController extends Controller
             'post_id' => $request->post,
             'title' => $request->title,
             'body' => $request->body,
-            'slug' => $slug
+            'slug' => $slug,
         ]);
 
         $comment->load(['user:id,name', 'post:id,title']);
@@ -67,22 +67,23 @@ class CommentController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Comentario creado correctamente.',
-            'comment' => new CommentResource($comment)
+            'comment' => new CommentResource($comment),
         ], Response::HTTP_CREATED);
     }
+
     public function update(UpdateCommentRequest $request, $post_id, $comment_id)
     {
         $comment = Comment::where('post_id', $post_id)->where('id', $comment_id)->first();
 
-        if (!$comment) {
+        if (! $comment) {
             return response()->json([
-                'message' => 'El comentario especificado no existe en este post.'
+                'message' => 'El comentario especificado no existe en este post.',
             ], Response::HTTP_NOT_FOUND);
         }
 
         if ($comment->user_id !== auth()->id()) {
             return response()->json([
-                'message' => 'No tienes permiso para editar este comentario.'
+                'message' => 'No tienes permiso para editar este comentario.',
             ], Response::HTTP_FORBIDDEN);
         }
 
@@ -91,23 +92,23 @@ class CommentController extends Controller
         $comment->update([
             'title' => $request->title,
             'slug' => Str::slug($request->title),
-            'body' => $request->body
+            'body' => $request->body,
         ]);
 
         return response()->json([
             'success' => true,
             'message' => 'Comentario actualizado correctamente.',
-            'comment' => new CommentResource($comment)
+            'comment' => new CommentResource($comment),
         ], Response::HTTP_OK);
     }
 
     public function destroy(UpdateCommentRequest $request, $post_id, $comment_id)
     {
         $comment = Comment::where('post_id', $post_id)->where('id', $comment_id)->first();
-        if ($comment->user_id !== auth()->id() && !auth()->user()->hasRole('admin')) {
+        if ($comment->user_id !== auth()->id() && ! auth()->user()->hasRole('admin')) {
             return response()->json([
                 'success' => false,
-                'message' => 'No tienes permiso para eliminar este comentario.'
+                'message' => 'No tienes permiso para eliminar este comentario.',
             ], Response::HTTP_FORBIDDEN);
         }
 
@@ -115,7 +116,7 @@ class CommentController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Comentario eliminado correctamente.'
+            'message' => 'Comentario eliminado correctamente.',
         ], Response::HTTP_OK);
     }
 }

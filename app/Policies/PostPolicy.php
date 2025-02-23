@@ -15,6 +15,7 @@ class PostPolicy
         if ($user->hasRole('god')) {
             return true;
         }
+
         return null;
     }
 
@@ -32,7 +33,6 @@ class PostPolicy
     {
         return $user->hasRole('user') || $user->hasRole('admin') || $user->hasRole('god');
     }
-
 
     public function update(User $user, Post $post): bool
     {

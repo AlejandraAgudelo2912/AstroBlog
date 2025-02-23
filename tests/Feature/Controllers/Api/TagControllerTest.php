@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\User;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Http\Response;
 
 beforeEach(function () {
@@ -20,8 +20,8 @@ it('returns all tags', function () {
     $response->assertStatus(Response::HTTP_OK)
         ->assertJsonStructure([
             'data' => [
-                '*' => ['id', 'name', 'slug', 'created_at']
-            ]
+                '*' => ['id', 'name', 'slug', 'created_at'],
+            ],
         ]);
 });
 
@@ -39,7 +39,7 @@ it('returns a specific tag', function () {
                 'id' => $tag->id,
                 'name' => $tag->name,
                 'slug' => $tag->slug,
-            ]
+            ],
         ]);
 });
 
@@ -61,8 +61,8 @@ it('creates a new tag', function () {
             'success' => true,
             'message' => 'Tag creado correctamente.',
             'tag' => [
-                'name' => 'Astronomy'
-            ]
+                'name' => 'Astronomy',
+            ],
         ]);
 
     $this->assertDatabaseHas('tags', ['name' => 'Astronomy']);
@@ -88,8 +88,8 @@ it('updates an existing tag', function () {
             'success' => true,
             'message' => 'Tag actualizado correctamente.',
             'tag' => [
-                'name' => 'Updated Tag Name'
-            ]
+                'name' => 'Updated Tag Name',
+            ],
         ]);
 
     $this->assertDatabaseHas('tags', ['id' => $tag->id, 'name' => 'Updated Tag Name']);
@@ -109,7 +109,7 @@ it('deletes a tag', function () {
     $response->assertStatus(Response::HTTP_OK)
         ->assertJson([
             'success' => true,
-            'message' => 'Tag eliminado correctamente.'
+            'message' => 'Tag eliminado correctamente.',
         ]);
 
     $this->assertDatabaseMissing('tags', ['id' => $tag->id]);

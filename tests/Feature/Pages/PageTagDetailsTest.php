@@ -1,15 +1,14 @@
 <?php
 
-
 use App\Models\Tag;
 
 it('shows details of a tag', function () {
-    //Arrange
+    // Arrange
     $tag = Tag::factory()->create();
 
-    //Act
+    // Act
     $this->get(route('tags.show', $tag))
-        //Assert
+        // Assert
         ->assertStatus(200)
         ->assertSee($tag->name);
 });

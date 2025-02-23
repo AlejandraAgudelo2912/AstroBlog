@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 class PostController extends Controller
 {
     use AuthorizesRequests;
+
     public function index()
     {
         return response()->json(Post::publicados()->get(), 200);
@@ -21,6 +22,7 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::findOrFail($id);
+
         return new PostResource($post);
     }
 
@@ -28,7 +30,7 @@ class PostController extends Controller
     {
         $user = auth()->user();
 
-        if (!$user->tokenCan('create-posts') && !$user->tokenCan('*')) {
+        if (! $user->tokenCan('create-posts') && ! $user->tokenCan('*')) {
             return response()->json(['error' => 'No tienes permisos para crear posts'], 403);
         }
         $request->validated();
@@ -52,7 +54,7 @@ class PostController extends Controller
 
         return response()->json([
             'message' => 'Post creado con éxito',
-            'post' => new PostResource($post)
+            'post' => new PostResource($post),
         ], 201);
     }
 
@@ -60,7 +62,7 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $user = auth()->user();
-        if (!$user->tokenCan('edit-own-posts') || ($user->id !== $post->user_id && !$user->tokenCan('*'))) {
+        if (! $user->tokenCan('edit-own-posts') || ($user->id !== $post->user_id && ! $user->tokenCan('*'))) {
             return response()->json(['error' => 'No tienes permisos para editar este post'], 403);
         }
 
@@ -70,7 +72,7 @@ class PostController extends Controller
             'status' => 'sometimes|required|in:public,draft,archived',
             'visibility' => 'sometimes|required|in:public,private',
             'published_at' => 'sometimes|nullable|date',
-            'category_id' => 'sometimes|exists:categories,id'
+            'category_id' => 'sometimes|exists:categories,id',
         ]);
 
         if ($request->filled('title')) {
@@ -81,25 +83,28 @@ class PostController extends Controller
 
         return response()->json([
             'message' => 'Post actualizado con éxito',
-            'post' => new PostResource($post->refresh())
+            'post' => new PostResource($post->refresh()),
         ]);
     }
+
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
         $user = auth()->user();
 
-        if (!$user->tokenCan('delete-own-posts') || ($user->id !== $post->user_id && !$user->tokenCan('*'))) {
+        if (! $user->tokenCan('delete-own-posts') || ($user->id !== $post->user_id && ! $user->tokenCan('*'))) {
             return response()->json(['error' => 'No tienes permisos para eliminar este post'], 403);
         }
 
         $post->delete();
+
         return response()->json(['message' => 'Post eliminado'], 200);
     }
 
     public function findById($id)
     {
         $post = Post::findOrFail($id);
+
         return response()->json($post);
     }
 }
